@@ -1,0 +1,41 @@
+<div class="row" id="available-parent">
+  <div class="col s10 offset-s2" id="available">
+    <form class="" action="<%= book_flight_path %>" method="get">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <table class="striped responsive-table centered">
+        <thead>
+          <tr>
+            <th data-field="name">AIRLINE</th>
+            <th data-field="name">DEPARTURE</th>
+            <th data-field="name">ARRIVAL</th>
+            <th data-field="price">COST</th>
+            <th data-field=""></th>
+          </tr>
+        </thead>
+        <tbody>
+          <div class="row">
+
+            <% @flights.each do |flight| %>
+            <tr>
+              <td><%= flight.airline_name %></td>
+              <td><%= flight.departure_date %></td>
+              <td><%= flight.arrival_date %></td>
+              <td>$<%= flight.cost %></td>
+              <td>
+                <input name="flight_group" type="radio" value="<%= flight.id %>"/>
+              </td>
+            </tr>
+            <% end %>
+          </div>
+        </tbody>
+      </table>
+      <div class="container row">
+        <div class="col s10 offset-s4">
+          <button class="btn waves-effect waves-light blue" type="submit" name="action">Select flight
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

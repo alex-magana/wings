@@ -1,0 +1,11 @@
+<div class='nested-fields'>
+  <div class="field">
+    <%= f.label :passenger_name %>
+    <%= f.text_field :passenger_name %>
+  </div>
+  <div class="field">
+    <%= f.label :passport_number %>
+    <%= f.text_field :passport_number %>
+  </div>
+  <%= link_to_remove_association "remove passenger", f %>
+</div>

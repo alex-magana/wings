@@ -1,0 +1,36 @@
+<%= form_for booking do |f| %>
+<% if booking.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(booking.errors.count, "error") %>
+    prohibited this project from being saved:</h2>
+
+  <ul>
+    <% booking.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="field">
+  <%= f.label :flight_id %>
+  <br/>
+  <%= f.text_field :flight_id %>
+</div>
+<div class="field">
+  <%= f.label :booking_code %>
+  <br/>
+  <%= f.text_field :booking_code %>
+</div>
+<h3>Passengers</h3>
+<div id='passengers'>
+  <%= f.fields_for :passengers do |passenger| %>
+  <%= render 'passenger_fields', :f => passenger %>
+  <% end %>
+  <div class='links'>
+    <%= link_to_add_association 'add passenger', f, :passengers %>
+  </div>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>

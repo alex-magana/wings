@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flight_code: MyString
+  airline_id: 1
+  airline_code: MyString
+  source_airport_id: 1
+  source_airport: MyString
+  destination_airport_id: 1
+  destination_airport: MyString
+  gate_id: 1
+  depature_date: 2016-10-03 12:48:28
+  arrival_date: 2016-10-03 12:48:28
+  cost: 9.99
+  capacity: 1
+  available_seats: 1
+  codeshare: MyString
+  stops: 1
+  equipment: MyString
+  is_deleted: false
+
+two:
+  flight_code: MyString
+  airline_id: 1
+  airline_code: MyString
+  source_airport_id: 1
+  source_airport: MyString
+  destination_airport_id: 1
+  destination_airport: MyString
+  gate_id: 1
+  depature_date: 2016-10-03 12:48:28
+  arrival_date: 2016-10-03 12:48:28
+  cost: 9.99
+  capacity: 1
+  available_seats: 1
+  codeshare: MyString
+  stops: 1
+  equipment: MyString
+  is_deleted: false

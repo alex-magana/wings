@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col s10 offset-s2">
+    <%= form_for @flight, method: :post do |f| %>
+    <% if flight.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %>
+        prohibited this project from being saved:</h2>
+
+      <ul>
+        <% flight.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+    <div class="row">
+      <div class="input-field col s8 offset-s2">
+        <%= f.label :flight_code %>
+        <br/>
+        <%= f.text_field :flight_code %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s4 offset-s1">
+        <%= f.label :source_airport %>
+        <br/>
+        <%= f.text_field :source_airport %>
+      </div>
+      <div class="input-field col s4 offset-s1">
+        <%= f.label :destination_airport %>
+        <br/>
+        <%= f.text_field :destination_airport %>
+        <div></div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.label :departure_date %>
+          <br/>
+          <%= f.text_field :departure_date %>
+        </div>
+      </div>
+
+    </div>
+    <h3>Passengers</h3>
+    <div id="bookings">
+      <%= f.fields_for :bookings do |booking| %>
+      <%= render "booking_fields", :f => booking %>
+      <% end %>
+      <div class="links">
+        <%= @flight.nil? %>
+
+      </div>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <% end %>
+  </div>
+</div>

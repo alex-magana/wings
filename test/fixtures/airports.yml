@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  airport_name: MyString
+  city: MyString
+  country: MyString
+  iata_faa_code: MyString
+  icao_code: MyString
+  latitude: 9.99
+  longitude: 9.99
+  altitude: 9.99
+  timezone: MyString
+  dst: MyString
+  tz_database_timezone: MyString
+  is_deleted: false
+
+two:
+  airport_name: MyString
+  city: MyString
+  country: MyString
+  iata_faa_code: MyString
+  icao_code: MyString
+  latitude: 9.99
+  longitude: 9.99
+  altitude: 9.99
+  timezone: MyString
+  dst: MyString
+  tz_database_timezone: MyString
+  is_deleted: false

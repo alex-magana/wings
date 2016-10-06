@@ -1,0 +1,27 @@
+// Place all the styles related to the flights controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#preferences {
+  position: relative;
+}
+
+#available-parent {
+  height: 90%;
+}
+
+#available {
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 10%;
+  overflow-y: auto;
+}
+
+td, th {
+  padding: 15px 15px 15px 15px;
+}
+
+input[type=radio]:checked, input[type=radio]:not(:checked) {
+  position: relative;
+  left: 0px;
+  visibility: visible;
+}
