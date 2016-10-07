@@ -1,0 +1,38 @@
+<div class="row" id="available-parent">
+  <div class="col s10 offset-s2" id="available">
+    <table class="striped responsive-table centered">
+      <thead>
+        <tr>
+          <th data-field="name"></th>
+          <th data-field="name"></th>
+          <th data-field="name"></th>
+          <th data-field="name"></th>
+          <th data-field="name"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <div class="row">
+
+          <% @booking.each do |booking| %>
+          <tr>
+            <td><%=  %></td>
+            <td><%=  %></td>
+            <td><%=  %></td>
+            <td>$<%=  %></td>
+            <td>
+              <ul>
+                <% booking%>
+                <li></li>
+                <% end %>
+              </ul>
+            </td>
+            <td>
+              <%=link_to "BACK", "/", :class=>"btn waves-effect waves-light blue"%>
+            </td>
+          </tr>
+          <% end %>
+        </div>
+      </tbody>
+    </table>
+  </div>
+</div>

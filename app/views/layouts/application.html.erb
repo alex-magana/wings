@@ -13,24 +13,48 @@
       <div class="navbar-fixed">
         <nav>
           <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">Logo</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse">
+            <a href="#" class="brand-logo">flightset</a>
+            <a href="#" data-activates="slide-out" class="button-collapse">
               <i class="material-icons">menu</i>
             </a>
-            <ul class="right hide-on-med-and-down">
+            <ul class="side-nav" id="slide-out">
               <li>
-                <a href="sass.html">Sign Up</a>
+                <a href="sass.html">
+                  <i class="material-icons menu-option">lock_open</i>
+                  Sign In
+                </a>
               </li>
               <li>
-                <a href="badges.html">Sign In</a>
-              </li>
-            </ul>
-            <ul class="side-nav" id="mobile-demo">
-              <li>
-                <a href="sass.html">Sign Up</a>
+                <div class="divider"></div>
               </li>
               <li>
-                <a href="badges.html">Sign In</a>
+                <a href="badges.html">
+                  <i class="material-icons menu-option">input</i>
+                  Sign Up
+                </a>
+              </li>
+              <li>
+                <div class="divider"></div>
+              </li>
+              <li class="no-padding">
+                <ul class="collapsible collapsible-accordion">
+                  <li>
+                    <a class="collapsible-header">
+                      <i class="material-icons menu-option">assignment</i>
+                      <span class="dropdown-parent">Bookings</span>
+                    </a>
+                    <div class="collapsible-body">
+                      <ul>
+                        <li>
+                          <a href="#!">Manage bookings</a>
+                        </li>
+                        <li>
+                          <a href="#!">Past bookings</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
@@ -49,23 +73,36 @@
         <div class="container">
           <div class="row">
             <div class="col l6 s12">
-              <h5 class="white-text">Footer Content</h5>
-              <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              <h5 class="white-text">Get Social</h5>
+              <ul>
+                <li class="footer-link">
+                  <a class="grey-text text-lighten-3" href="#!">
+                    <%= image_tag("social_facebook", height: '32', width: '32') %>
+                  </a>
+                </li>
+                <li class="footer-link">
+                  <a class="grey-text text-lighten-3" href="#!">
+                    <%= image_tag("social_twitter", height: '32', width: '32') %>
+                  </a>
+                </li>
+                <li class="footer-link">
+                  <a class="grey-text text-lighten-3" href="#!">
+                    <%= image_tag("social_instagram", height: '32', width: '32') %>
+                  </a>
+                </li>
+              </ul>
             </div>
             <div class="col l4 offset-l2 s12">
               <h5 class="white-text">Links</h5>
               <ul>
                 <li class="footer-link">
-                  <a class="grey-text text-lighten-3" href="#!">Link 1</a>
+                  <a class="grey-text text-lighten-3" href="#!">About us</a>
                 </li>
                 <li class="footer-link">
-                  <a class="grey-text text-lighten-3" href="#!">Link 2</a>
+                  <a class="grey-text text-lighten-3" href="#!">Contact us</a>
                 </li>
                 <li class="footer-link">
-                  <a class="grey-text text-lighten-3" href="#!">Link 3</a>
-                </li>
-                <li class="footer-link">
-                  <a class="grey-text text-lighten-3" href="#!">Link 4</a>
+                  <a class="grey-text text-lighten-3" href="#!">Terms</a>
                 </li>
               </ul>
             </div>
@@ -73,8 +110,7 @@
         </div>
         <div class="footer-copyright">
           <div class="container">
-            © 2016 Copyright Wings
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            © 2016 Copyright Flightset
           </div>
         </div>
       </footer>

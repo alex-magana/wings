@@ -1,10 +1,34 @@
 <div class="row" id="">
   <div class="col s10 offset-s2">
-    <form class="" action="<%= book_flight_path %>" method="get">
+    <form class="" action="/bookings" method="post">
       <div class="row">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <label for="<%= i %>">Radio select</label>
-        <input name="flight_group" type="text" value="<%= i %>" disabled/>
+        <% @booking.each do |booking| %>
+        <!-- <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <label for="flight_code">/label>
+        <input name="flight_code" type="text" value="<%= booking.flight.flight_code %>" disabled/>
+        <label for="airline_code">/label>
+        <input name="airline_code" type="text" value="<%= booking.flight.airline_code %>" disabled/>
+        <label for="source_airport">/label>
+        <input name="source_airport" type="text" value="<%= booking.flight.source_airport %>" disabled/>
+        <label for="destination_airport">/label>
+        <input name="destination_airport" type="text" value="<%= booking.flight.destination_airport %>" disabled/>
+        <label for="gate_id">/label>
+        <input name="gate_id" type="text" value="<%= booking.flight.gate_id %>" disabled/>
+        <label for="departure_date">/label>
+        <input name="departure_date" type="text" value="<%= booking.flight.departure_date %>" disabled/>
+        <label for="arrival_date">/label>
+        <input name="arrival_date" type="text" value="<%= booking.flight.arrival_date %>" disabled/>
+        <label for="flight_cost">/label>
+        <input name="flight_cost" type="text" value="<%= booking.flight.cost %>" disabled/> -->
+        <label for="booking_code">/label>
+        <input name="booking_code" type="text" value="<%= booking.booking_code %>" disabled/>
+        <% booking.passengers.each do |passenger| %>
+        <label for="<%= passenger.passenger_name %>">/label>
+        <input name="<%= passenger.passenger_name %>" type="text" value="<%= passenger.passenger_name %>" disabled/>
+        <label for="<%= passenger.passport_number %>">/label>
+        <input name="<%= passenger.passport_number %>" type="text" value="<%= passenger.passport_number %>" disabled/>
+        <% end %>
+        <% end %>
       </div>
       <div class="row">
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit

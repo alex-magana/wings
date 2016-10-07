@@ -23,6 +23,18 @@ nav, footer.page-footer {
   background-color: #F57F17;
 }
 
+.side-nav a {
+  display: inline-flex;
+}
+
+.menu-option {
+  margin-right: 3px;
+}
+
+.dropdown-parent {
+  margin-left: -11px;
+}
+
 #header {
   height: 10%;
   width: 100%;

@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   root "flights#home"
 
   get "search_flights" => "flights#search_flights", as: "search_flights"
-  get "book_flight" => "flights#book_flight", as: "book_flight"
+  post "confirm_booking" => "bookings#confirm_booking", as: "confirm_booking"
+  get  "search_booking" => "bookings#search_booking", as: "search_booking"
 end
