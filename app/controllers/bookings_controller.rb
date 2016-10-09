@@ -5,8 +5,8 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = Booking.all
-    #@bookings = Booking.where("user_id = ? and is_deleted = ?", @current_user, 0)
     binding.pry
+    #@bookings = Booking.where("user_id = ? and is_deleted = ?", @current_user, 0)
   end
 
   def show
@@ -15,6 +15,8 @@ class BookingsController < ApplicationController
   def new
     @flight = Flight.find(params[:flight_group].to_i)
     @booking = Booking.new
+    @booking.user_id = 2
+    binding.pry
     @booking.flight = @flight
   end
 
@@ -42,15 +44,25 @@ class BookingsController < ApplicationController
 
   def confirm_booking
     @booking = params
-    binding.pry
     render '_confirm_booking'
   end
 
   def search_booking
-    @booking = Booking.select("bookings.*, flights.*")
-                     .joins("INNER JOIN flights ON flights.id = bookings.flight_id")
-                     .where("booking_code = ?", params[:booking_code])
+    @bookings = Booking.select("bookings.*, flights.flight_code, flights.airline_code, flights.departure_date, flights.arrival_date")
+                       .joins("INNER JOIN flights ON flights.id = bookings.flight_id")
+                       .where("bookings.booking_code = ?", params[:booking_code])
     render '_search_results'
+  end
+
+  def past_bookings
+    @bookings = Booking.select("bookings.*, flights.flight_code, flights.airline_code, flights.departure_date, flights.arrival_date")
+                       .joins("INNER JOIN flights ON flights.id = bookings.flight_id")
+                       .where("bookings.user_id = ?", 2) # params[:user_id]
+    render '_past_bookings'
+  end
+
+  def manage_bookings
+    render '_search_booking'
   end
 
   private
@@ -66,6 +78,6 @@ class BookingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def booking_params
-      params.require(:booking).permit(:flight_id, :booking_code, passengers_attributes: [:id, :passenger_name, :passport_number, :_destroy])
+      params.require(:booking).permit(:user_id, :flight_id, :booking_code, passengers_attributes: [:id, :passenger_name, :passport_number, :_destroy])
     end
 end

@@ -1,9 +1,10 @@
 $(document).ready(function() {
   $(".button-collapse").sideNav();
 
-  // $('.button-collapse').sideNav('show');
-
-  // $('.button-collapse').sideNav('hide');
+  $("#menu").click(function() {
+    // $('.button-collapse').sideNav('show');
+    // $('.button-collapse').sideNav('hide');
+  });
 
   $('select').material_select();
 

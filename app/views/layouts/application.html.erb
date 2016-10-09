@@ -19,7 +19,7 @@
             </a>
             <ul class="side-nav" id="slide-out">
               <li>
-                <a href="sass.html">
+                <a href="<%= login_path %>">
                   <i class="material-icons menu-option">lock_open</i>
                   Sign In
                 </a>
@@ -28,7 +28,7 @@
                 <div class="divider"></div>
               </li>
               <li>
-                <a href="badges.html">
+                <a href="<%= signup_path %>">
                   <i class="material-icons menu-option">input</i>
                   Sign Up
                 </a>
@@ -46,10 +46,10 @@
                     <div class="collapsible-body">
                       <ul>
                         <li>
-                          <a href="#!">Manage bookings</a>
+                          <a href="<%= past_bookings_path %>">Past bookings</a>
                         </li>
                         <li>
-                          <a href="#!">Past bookings</a>
+                          <a href="<%= manage_bookings_path %>">Manage bookings</a>
                         </li>
                       </ul>
                     </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005021422) do
+ActiveRecord::Schema.define(version: 20161007091246) do
 
   create_table "airlines", force: :cascade do |t|
     t.string   "airline_name"
@@ -46,8 +46,10 @@ ActiveRecord::Schema.define(version: 20161005021422) do
     t.string   "booking_code"
     t.boolean  "is_deleted"
     t.integer  "flight_id"
+    t.integer  "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "email"
     t.index ["flight_id"], name: "index_bookings_on_flight_id"
   end
 
@@ -80,6 +82,24 @@ ActiveRecord::Schema.define(version: 20161005021422) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["booking_id"], name: "index_passengers_on_booking_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "role_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "password"
+    t.integer  "role_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
 end
