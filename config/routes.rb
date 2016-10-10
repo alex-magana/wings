@@ -5,11 +5,14 @@ Rails.application.routes.draw do
   resources :bookings
   resources :passengers
 
-  root "flights#home"
+  root "flights#index"
 
   get "login" => "users#login", as: "login"
+  post "user_authenticate" => "users#user_authenticate", as: "user_authenticate"
+  delete "logout" => "users#logout", as: "logout"
+  post "reset_password" => "user#reset_password", as: "reset_password"
   get "signup" => "users#signup", as: "signup"
-  get "search_flights" => "flights#search_flights", as: "search_flights"
+  get "search_flights" => "flights#search_flights", as: "search_flights", defaults: { format: 'js' }
   post "confirm_booking" => "bookings#confirm_booking", as: "confirm_booking"
   get "past_bookings" => "bookings#past_bookings", as: "past_bookings"
   get "manage_bookings" => "bookings#manage_bookings", as: "manage_bookings"

@@ -34,6 +34,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
 end
 
 group :development do
@@ -51,3 +52,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'materialize-sass', '~> 0.96.1'
 
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
+
+gem 'faker', '~> 1.6', '>= 1.6.6'
+
+gem 'capybara', '~> 2.10', '>= 2.10.1'
+
+gem 'factory_girl_rails', '~> 4.7'

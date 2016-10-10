@@ -18,6 +18,25 @@
               <i class="material-icons">menu</i>
             </a>
             <ul class="side-nav" id="slide-out">
+              <% if current_user %>
+              <li>
+                <a href="<%= logout_path %>" data-method="delete" rel="nofollow">
+                  <i class="material-icons menu-option">lock_open</i>
+                  Log Out
+                </a>
+              </li>
+              <li>
+                <div class="divider"></div>
+              </li>
+              <li>
+                <a href="<%= user_path(current_user.id) %>">
+                  <i class="material-icons menu-option">input</i>
+                  <%= current_user.first_name %>
+                </a>
+              </li>
+              <% else %>
+
+
               <li>
                 <a href="<%= login_path %>">
                   <i class="material-icons menu-option">lock_open</i>
@@ -36,6 +55,7 @@
               <li>
                 <div class="divider"></div>
               </li>
+              <% end %>
               <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
                   <li>
@@ -46,7 +66,9 @@
                     <div class="collapsible-body">
                       <ul>
                         <li>
+                          <% if current_user %>
                           <a href="<%= past_bookings_path %>">Past bookings</a>
+                          <% end %>
                         </li>
                         <li>
                           <a href="<%= manage_bookings_path %>">Manage bookings</a>

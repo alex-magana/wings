@@ -1,4 +1,4 @@
-<%= form_for booking, :url => { :action => "confirm_booking" } do |f| %>
+<%= form_for booking, :url => { :action => "create" } do |f| %>
 <% if booking.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(booking.errors.count, "error") %>
@@ -24,26 +24,18 @@
   <br/>
   <%= f.text_field :booking_code, readonly: true %>
 </div>
-
 <div class="field">
   <%= f.label :email %>
   <br/>
-  <% if current_user %>
   <%= f.email_field :email, readonly: true %>
-  <% else %>
-  <%= f.email_field :email %>
-  <% end %>
 </div>
 <h5>Passengers</h5>
 <div id='passengers'>
   <%= f.fields_for :passengers do |passenger| %>
-  <%= render 'passenger_fields', :f => passenger %>
+  <%= render 'confirm_passengers', :f => passenger %>
   <% end %>
-  <div class='links'>
-    <%= link_to_add_association 'add passenger', f, :passengers %>
-  </div>
 </div>
 <div class="actions">
-  <%= f.submit %>
+  <%= f.submit "CONFIRM"%>
 </div>
 <% end %>

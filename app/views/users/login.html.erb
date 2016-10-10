@@ -1,18 +1,18 @@
 <div class="row" id="login-page">
   <div class="col s12 z-depth-6 card-panel" id="login-details">
-    <form class="login-form">
+    <form class="login-form" action="<%= user_authenticate_path %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <div class="row margin">
         <div class="input-field col s12">
           <i class="mdi-social-person-outline prefix"></i>
-          <input class="validate" id="email" type="email">
-          <label for="email" data-error="wrong" data-success="right" class="center-align">Email</label>
+          <input class="validate" name="email" type="email">
+          <label for="email" data-error="Wrong" class="center-align">Email</label>
         </div>
       </div>
       <div class="row margin">
         <div class="input-field col s12">
           <i class="mdi-action-lock-outline prefix"></i>
-          <input id="password" type="password">
+          <input name="password" type="password">
           <label for="password">Password</label>
         </div>
       </div>
@@ -24,7 +24,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <button name="button" type="submit" class="submit btn waves-effect waves-light blue col s12">
+          <button type="submit" class="submit btn waves-effect waves-light blue col s12">
             Login
           </button>
         </div>

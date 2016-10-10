@@ -1,34 +1,9 @@
-<div class="row" id="preferences">
-  <div class="col s10 offset-s2">
-    <form action="<%= search_flights_path %>" method="get">
-      <select name="origin" class="col s2">
-        <option value="" disabled selected>Origin</option>
-        <% @airports.each do |airport| %>
-        <option value="<%= airport.id %>"><%= airport.airport_name %></option>
-        <% end %>
-      </select>
-      <select name="destination" class="col s2">
-        <option value="" disabled selected>Destination</option>
-        <% @airports.each do |airport| %>
-        <option value="<%= airport.id %>"><%= airport.airport_name %></option>
-        <% end %>
-      </select>
-      <select name="passenger" class="col s2">
-        <option value="" disabled selected>No. of passengers</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-      </select>
-      <input name="flight_date" type="date" class="datepicker col s2" placeholder="Date">
-      <button class="btn-floating btn-large waves-effect waves-light blue" col s2"" type="submit" name="action">
-        <i class="material-icons">search</i>
-      </button>
-    </form>
-  </div>
-</div>
+<%= form_tag(search_flights_path, remote: true, method: "get", id: "form-preferences") do %>
+  <%= select_tag "origin", options_from_collection_for_select(airports, "id", "airport_name"), class: "col s2 validate", prompt: "Origin" %>
+  <%= select_tag "destination", options_from_collection_for_select(airports, "id", "airport_name"), class: "col s2 validate", prompt: "Destination" %>
+  <%= select_tag "passenger", options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9]]), class: "col s2 validate", prompt: "No. of passengers" %>
+  <%= text_field_tag "flight_date", nil, class: "datepicker col s2 validate", placeholder: "Date" %>
+  <%= button_tag(type: "submit", class: "btn-floating btn-large waves-effect waves-light blue", disable_with: "Searching...") do %>
+   <i class="material-icons">search</i>
+  <% end %>
+<% end %>

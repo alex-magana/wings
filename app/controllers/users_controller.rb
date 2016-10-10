@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
+  before_action :user_params, only: [:create, :user_authenticate]
   def index
     @users = User.all
-    # @bookings = Booking.where("user_id = ? and is_deleted = ?", @current_user, 0)
   end
 
   def show
@@ -15,12 +15,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.role_id = 2
     respond_to do |format|
       if @user.save
+        WingsMailer.send_email(@user.email).deliver
         format.html { redirect_to login_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :new }
+        format.html { redirect_to signup_path }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -34,6 +36,23 @@ class UsersController < ApplicationController
 
   def login
     render 'login'
+  end
+
+  def user_authenticate
+    @user = User.where("email = ? and password = ?", user_params[:email], user_params[:password]).first
+    if @user.email == user_params[:email]
+      session[:user_id] = @user.id
+      redirect_to flights_path
+    end
+  end
+
+  def logout
+    session[:user_id] = nil
+    redirect_to root_path
+  end
+
+  def reset_password
+
   end
 
   private
