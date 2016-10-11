@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20161007091246) do
     t.string   "source_airport"
     t.integer  "destination_airport_id"
     t.string   "destination_airport"
-    t.integer  "gate_id"
+    t.string   "gate_id"
     t.datetime "departure_date"
     t.datetime "arrival_date"
     t.decimal  "cost"

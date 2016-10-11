@@ -4,13 +4,11 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
+
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
   pool: 5
   timeout: 5000
-  username: localhost
-  password: 63537723
 
 # development:
   # <<: *default
@@ -23,15 +21,19 @@ default: &default
   # <<: *default
   # database: db/test.sqlite3
 
-# production:
-  # <<: *default
-  # database: db/production.sqlite3
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username: msrrfdagcjscxr
+  password: wi6v6rXF75yR7LIzB9V2-8ztkk
+  database: db/production
 
 development:
   <<: *default
-  database: wings_db
-
+  database: db/development.sqlite3
 
 test:
   <<: *default
-  database: wings_db_test
+  database: db/test.sqlite3
