@@ -5,23 +5,12 @@ RSpec.describe Passenger, type: :model do
   describe 'associations' do
     it { should belong_to(:booking) }
   end
-  describe '.validate_passenger_name' do
-    it 'must have a passenger_name' do
-      expect(build(:passenger, passenger_name: nil).save).to eq false
-    end
-
-    it 'must have the correct characters' do
-      expect(build(:passenger, passenger_name: '1234').save).to eql false
-    end
-
-    it 'must have the correct length' do
-      expect(build(:passenger, passenger_name: 'A').save).to eql false
-    end
+  describe 'validates passenger name' do
+    it { should validate_presence_of :passenger_name }
+    it { should_not allow_value('1234').for(:passenger_name) }
+    it { should validate_length_of(:first_name).is_at_least(3) }
   end
-
-  describe '.validate_passport_number' do
-    it 'must have a passport_number' do
-      expect(build(:passenger, passport_number: nil).save).to eq false
-    end
+  describe 'validates passport number' do
+    it { should validate_presence_of :passport_number }
   end
 end

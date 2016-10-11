@@ -1,13 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Email:</strong>
-</p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="row">
+  <div class="col s7 card center" id="user-details">
+    <p id="notice"><%= notice %></p>
+    <p>
+      <strong>First name:</strong>
+      <%= @user.first_name %>
+    </p>
+    <p>
+      <strong>Middle name:</strong>
+      <%= @user.middle_name %>
+    </p>
+    <p>
+      <strong>Last name:</strong>
+      <%= @user.last_name %>
+    </p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+    <%= link_to 'Back', root_path , class: "btn-large waves-effect waves-light blue"%>
+  </div>
+</div>

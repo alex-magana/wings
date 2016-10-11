@@ -30,7 +30,6 @@ class BookingsController < ApplicationController
   end
 
   def create
-    binding.pry
     @booking = Booking.new(booking_params)
     respond_to do |format|
       if @booking.save

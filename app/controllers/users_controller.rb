@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :user_params, only: [:create, :user_authenticate]
+
   def index
     @users = User.all
   end
@@ -18,7 +20,6 @@ class UsersController < ApplicationController
     @user.role_id = 2
     respond_to do |format|
       if @user.save
-        WingsMailer.send_email(@user.email).deliver
         format.html { redirect_to login_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -56,6 +57,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def set_user
+      @user = User.find(params[:id])
+    end
 
     def user_params
       params.permit(:first_name, :middle_name, :last_name, :email, :password, :role_id)

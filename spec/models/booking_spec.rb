@@ -8,32 +8,17 @@ RSpec.describe Booking, type: :model do
   describe 'associations' do
     it { should have_many(:passengers) }
   end
-  describe '.validate_booking_code' do
-    it 'must have a booking_code' do
-      expect(build(:booking, booking_code: nil).save).to eq false
-    end
+  describe 'validates booking code' do
+    it { should validate_presence_of :booking_code }
   end
-
-  describe '.validate_flight_id' do
-    it 'must have a flight_id' do
-      expect(build(:booking, flight_id: nil).save).to eq false
-    end
+  describe 'validates flight id' do
+    it { should validate_presence_of :flight_id }
   end
-
-  describe '.validate_user_id' do
-    it 'must have a user_id' do
-      expect(build(:booking, user_id: nil).save).to eq false
-    end
+  describe 'validates user id' do
+    it { should validate_presence_of :user_id }
   end
-
-  describe '.validate_email' do
-    it 'must have an email' do
-      expect(build(:booking, email: nil).save).to eql false
-    end
-
-    it 'must not contain invalid characters' do
-      expect(build(:booking, email: 'person.ide%ntity[]()@.gmail.com').save)
-        .to eql false
-    end
+  describe 'validates email' do
+    it { should validate_presence_of :email }
+    it { should_not allow_value('person.ide%ntity[]()@.gmail.com').for(:email) }
   end
 end

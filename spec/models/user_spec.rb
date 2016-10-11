@@ -1,74 +1,41 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject(:user) { create(:user, email: Faker::Internet.email) }
+  subject(:user) { create(:user) }
   describe 'associations' do
     it { should belong_to(:role) }
   end
-  describe '.validate_first_name' do
-    it 'must have a first_name' do
-      expect(build(:user, first_name: nil).save).to eq false
-    end
-
-    it 'must have the correct characters' do
-      expect(build(:user, first_name: '1234').save).to eql false
-    end
-
-    it 'must have the correct length' do
-      expect(build(:user, first_name: 'A').save).to eql false
+  describe 'validates first name' do
+    it { should validate_presence_of :first_name }
+    it { should_not allow_value('1234').for(:first_name) }
+    it do
+      should validate_length_of(:first_name).is_at_least(3)
+        .with_message("Too short. The minimum length is 3 characters.")
     end
   end
-
-  describe '.validate_middle_name' do
-    it 'must have a middle_name' do
-      expect(build(:user, middle_name: nil).save).to eq false
-    end
-
-    it 'must have the correct characters' do
-      expect(build(:user, middle_name: '1234').save).to eql false
-    end
-
-    it 'must have the correct length' do
-      expect(build(:user, middle_name: 'A').save).to eql false
+  describe 'validates middle name' do
+    it { should validate_presence_of :middle_name }
+    it { should_not allow_value('1234').for(:middle_name) }
+    it do
+      should validate_length_of(:middle_name).is_at_least(3)
+        .with_message("Too short. The minimum length is 3 characters.")
     end
   end
-
-  describe '.validate_last_name' do
-    it 'must have a last_name' do
-      expect(build(:user, last_name: nil).save).to eq false
-    end
-
-    it 'must have the correct characters' do
-      expect(build(:user, last_name: '1234').save).to eql false
-    end
-
-    it 'must have the correct length' do
-      expect(build(:user, last_name: 'A').save).to eql false
+  describe 'validates last name' do
+    it { should validate_presence_of :last_name }
+    it { should_not allow_value('1234').for(:last_name) }
+    it do
+      should validate_length_of(:last_name).is_at_least(3)
+        .with_message("Too short. The minimum length is 3 characters.")
     end
   end
-
-  describe '.validate_email' do
-    it 'must have an email' do
-      expect(build(:user, email: nil).save).to eql false
-    end
-
-    it 'must be unique' do
-      expect(build(:user, email: user.email).save).to eql false
-    end
-
-    it 'must not contain invalid characters' do
-      expect(build(:user, email: 'person.ide%ntity[]()@.gmail.com').save)
-        .to eql false
-    end
+  describe 'validates email' do
+    it { should validate_presence_of :email }
+    it { should validate_uniqueness_of :email}
+    it { should_not allow_value('person.ide%ntity[]()@.gmail.com').for(:email) }
   end
-
-  describe '.validate_password' do
-    it 'must have a password' do
-      expect(build(:user, password: nil).save).to eql false
-    end
-
-    it 'must have the correct length' do
-      expect(build(:user, password: 'short').save).to be false
-    end
+  describe 'validate password' do
+    it { should validate_presence_of :password }
+    it { should validate_length_of(:password).is_at_least(6) }
   end
 end

@@ -13,12 +13,21 @@
       <div class="navbar-fixed">
         <nav>
           <div class="nav-wrapper">
-            <a href="#" class="brand-logo">flightset</a>
-            <a href="#" data-activates="slide-out" class="button-collapse">
+            <a href="#" class="brand-logo center">flightset</a>
+            <a href="#" data-activates="slide-out" class="button-collapse" id="menu">
               <i class="material-icons">menu</i>
             </a>
             <ul class="side-nav" id="slide-out">
               <% if current_user %>
+              <li>
+                <a href="<%= user_path(current_user.id) %>">
+                  <i class="material-icons menu-option">input</i>
+                  <%= current_user.first_name %>
+                </a>
+              </li>
+              <li>
+                <div class="divider"></div>
+              </li>
               <li>
                 <a href="<%= logout_path %>" data-method="delete" rel="nofollow">
                   <i class="material-icons menu-option">lock_open</i>
@@ -28,15 +37,7 @@
               <li>
                 <div class="divider"></div>
               </li>
-              <li>
-                <a href="<%= user_path(current_user.id) %>">
-                  <i class="material-icons menu-option">input</i>
-                  <%= current_user.first_name %>
-                </a>
-              </li>
               <% else %>
-
-
               <li>
                 <a href="<%= login_path %>">
                   <i class="material-icons menu-option">lock_open</i>
@@ -94,7 +95,7 @@
       <footer class="page-footer">
         <div class="container">
           <div class="row">
-            <div class="col l6 s12">
+            <div class="col l6 s6" id="social">
               <h5 class="white-text">Get Social</h5>
               <ul>
                 <li class="footer-link">
@@ -114,7 +115,7 @@
                 </li>
               </ul>
             </div>
-            <div class="col l4 offset-l2 s12">
+            <div class="col l4 offset-l2 s6" id="more-information">
               <h5 class="white-text">Links</h5>
               <ul>
                 <li class="footer-link">

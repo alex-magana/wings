@@ -5,9 +5,7 @@ RSpec.describe Role, type: :model do
   describe 'associations' do
     it { should have_many(:users) }
   end
-  describe '.validate_role_name' do
-    it 'must have a role_name' do
-      expect(build(:role, role_name: nil).save).to eq false
-    end
+  describe 'validates role name' do
+    it { should validate_presence_of :role_name }
   end
 end

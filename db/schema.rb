@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20161007091246) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "airlines", force: :cascade do |t|
     t.string   "airline_name"
     t.string   "airline_alias"
@@ -50,7 +53,7 @@ ActiveRecord::Schema.define(version: 20161007091246) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "email"
-    t.index ["flight_id"], name: "index_bookings_on_flight_id"
+    t.index ["flight_id"], name: "index_bookings_on_flight_id", using: :btree
   end
 
   create_table "flights", force: :cascade do |t|
@@ -81,7 +84,7 @@ ActiveRecord::Schema.define(version: 20161007091246) do
     t.integer  "booking_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["booking_id"], name: "index_passengers_on_booking_id"
+    t.index ["booking_id"], name: "index_passengers_on_booking_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -99,7 +102,7 @@ ActiveRecord::Schema.define(version: 20161007091246) do
     t.integer  "role_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["role_id"], name: "index_users_on_role_id"
+    t.index ["role_id"], name: "index_users_on_role_id", using: :btree
   end
 
 end

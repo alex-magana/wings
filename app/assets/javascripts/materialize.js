@@ -1,10 +1,13 @@
 $(document).ready(function() {
   $(".button-collapse").sideNav();
 
-  $("#menu").click(function() {
-    // $('.button-collapse').sideNav('show');
-    // $('.button-collapse').sideNav('hide');
-  });
+  $('.button-collapse').sideNav({
+      menuWidth: 300,
+      closeOnClick: true
+    }
+  );
+
+  $('.collapsible').collapsible();
 
   $('select').material_select();
 
