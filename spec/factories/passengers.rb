@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :passenger do
-    booking
     passenger_name Faker::Name.first_name
     passport_number Faker::Code.asin
+    booking
   end
 end

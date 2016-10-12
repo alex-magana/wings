@@ -1,11 +1,13 @@
 $(document).ready(function() {
+  $(".dropdown-button").dropdown();
+
   $(".button-collapse").sideNav();
 
-  $('.button-collapse').sideNav({
-      menuWidth: 300,
-      closeOnClick: true
-    }
-  );
+  // $('.button-collapse').sideNav({
+      // menuWidth: 300,
+      // closeOnClick: true
+    // }
+  // );
 
   $('.collapsible').collapsible();
 

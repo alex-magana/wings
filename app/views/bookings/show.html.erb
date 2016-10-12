@@ -1,14 +1,17 @@
-<p id="notice"><%= notice %></p>
+<div class="row" id="new-reservation">
+  <div class="col s10 offset-s1 card-panel" id="option-fields">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Flight id:</strong>
-  <%= @booking.flight_id %>
-</p>
+    <p>
+      <strong>Flight id:</strong>
+      <%= @booking.flight_id %>
+    </p>
 
-<p>
-  <strong>Booking code:</strong>
-  <%= @booking.booking_code %>
-</p>
+    <p>
+      <strong>Booking code:</strong>
+      <%= @booking.booking_code %>
+    </p>
 
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
-<%= link_to 'Back', bookings_path %>
+    <%= link_to 'HOME', root_path, class: "btn waves-effect waves-light blue back" %>
+  </div>
+</div>

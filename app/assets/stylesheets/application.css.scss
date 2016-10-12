@@ -23,6 +23,10 @@ nav, footer.page-footer {
   background-color: #F57F17;
 }
 
+.top-right {
+  display: inline-flex !important;
+}
+
 .side-nav a {
   display: inline-flex;
 }
@@ -67,10 +71,4 @@ nav, footer.page-footer {
 
 #more-information {
   float: right;
-}
-
-@media only screen and (min-width: 993px) {
-  nav a.button-collapse {
-    display: block;
-  }
 }

@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col s7 card center" id="user-details">
+<div class="row current-user">
+  <div class="col s7 z-depth-6 card-panel center" id="user-details">
     <p id="notice"><%= notice %></p>
     <p>
       <strong>First name:</strong>
@@ -17,6 +17,6 @@
       <strong>Email:</strong>
       <%= @user.email %>
     </p>
-    <%= link_to 'Back', root_path , class: "btn-large waves-effect waves-light blue"%>
+    <%= link_to 'Back', root_path , class: "btn-large waves-effect waves-light blue back"%>
   </div>
 </div>

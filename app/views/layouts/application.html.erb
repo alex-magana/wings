@@ -17,6 +17,52 @@
             <a href="#" data-activates="slide-out" class="button-collapse" id="menu">
               <i class="material-icons">menu</i>
             </a>
+            <ul id="dropdown-top" class="dropdown-content">
+              <% if current_user %>
+              <li>
+                <a href="<%= past_bookings_path %>">Past bookings</a>
+              </li>
+              <% end %>
+              <li class="divider"></li>
+              <li>
+                <a href="<%= manage_bookings_path %>">Manage bookings</a>
+              </li>
+            </ul>
+            <ul class="right hide-on-med-and-down">
+              <% if current_user %>
+              <li class="top-right">
+                <a href="<%= user_path(current_user.id) %>" class="top-right">
+                  <i class="material-icons menu-option top-right">input</i>
+                  <%= current_user.first_name %>
+                </a>
+              </li>
+              <li class="top-right">
+                <a href="<%= logout_path %>" class="top-right" data-method="delete" rel="nofollow">
+                  <i class="material-icons menu-option top-right">lock_open</i>
+                  Log Out
+                </a>
+              </li>
+            <% else %>
+              <li class="top-right">
+                <a href="<%= login_path %>" class="top-right">
+                  <i class="material-icons menu-option top-right">lock_open</i>
+                  Sign In
+                </a>
+              </li>
+              <li class="top-right">
+                <a href="<%= signup_path %>" class="top-right">
+                  <i class="material-icons menu-option top-right">input</i>
+                  Sign Up
+                </a>
+              </li>
+              <% end %>
+              <li class="top-right">
+                <a class="dropdown-button top-right" href="#" data-activates="dropdown-top">
+                  <i class="material-icons left menu-option">assignment</i>
+                  <span class="dropdown-parent">Bookings</span>
+                </a>
+              </li>
+            </ul>
             <ul class="side-nav" id="slide-out">
               <% if current_user %>
               <li>
@@ -37,7 +83,7 @@
               <li>
                 <div class="divider"></div>
               </li>
-              <% else %>
+            <% else %>
               <li>
                 <a href="<%= login_path %>">
                   <i class="material-icons menu-option">lock_open</i>

@@ -34,16 +34,16 @@
   <%= f.email_field :email %>
   <% end %>
 </div>
-<h5>Passengers</h5>
+<h6 class="align">Passengers</h6>
 <div id='passengers'>
   <%= f.fields_for :passengers do |passenger| %>
   <%= render 'passenger_fields', :f => passenger %>
   <% end %>
   <div class='links'>
-    <%= link_to_add_association 'add passenger', f, :passengers %>
+    <%= link_to_add_association 'add passenger', f, :passengers, class: "btn waves-effect waves-light blue" %>
   </div>
 </div>
-<div class="actions">
-  <%= f.submit %>
+<div class="actions btn waves-effect waves-light blue create-booking">
+  <%= f.submit "CREATE BOOKING"%>
 </div>
 <% end %>

@@ -8,7 +8,7 @@ RSpec.describe Passenger, type: :model do
   describe 'validates passenger name' do
     it { should validate_presence_of :passenger_name }
     it { should_not allow_value('1234').for(:passenger_name) }
-    it { should validate_length_of(:first_name).is_at_least(3) }
+    it { should validate_length_of(:passenger_name).is_at_least(3) }
   end
   describe 'validates passport number' do
     it { should validate_presence_of :passport_number }
