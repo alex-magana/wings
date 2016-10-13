@@ -45,6 +45,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
   gem 'rails-controller-testing'
   gem 'launchy'
+  gem 'seed_dump'
 end
 
 group :development do
