@@ -1,5 +1,5 @@
-<div class="row" id="available-parent">
-  <div class="col s10 offset-s1" id="available">
+<div class="row past" id="available-parent">
+  <div class="col s10 offset-s1 past-child">
     <table class="striped responsive-table centered">
       <thead>
         <tr>
@@ -14,33 +14,32 @@
         </tr>
       </thead>
       <tbody>
-        <div class="row">
-
-          <% @bookings.each do |booking| %>
-          <tr>
-            <td><%= booking.booking_code %></td>
-            <td><%= booking.email %></td>
-            <td><%= booking.created_at %></td>
-            <td>$<%= booking.flight_code %></td>
-            <td>$<%= booking.airline_code %></td>
-            <td>$<%= booking.departure_date %></td>
-            <td>$<%= booking.arrival_date %></td>
-            <td>
-              <ul>
-                <% booking.passengers.each do |passenger| %>
-                <li><%= passenger.passenger_name %></li>
-                <li><%= passenger.passport_number %></li>
-                <% end %>
-              </ul>
-            </td>
-            <td>
-              <%= link_to 'DELETE', booking, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-floating btn-large waves-effect waves-light blue" %>
-            </td>
-          </tr>
-          <% end %>
-        </div>
+        <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.booking_code %></td>
+          <td><%= booking.email %></td>
+          <td><%= booking.created_at %></td>
+          <td><%= booking.flight_code %></td>
+          <td>#<%= booking.airline_code %></td>
+          <td><%= booking.departure_date %></td>
+          <td><%= booking.arrival_date %></td>
+          <td>
+            <ul>
+              <% booking.passengers.each do |passenger| %>
+              <li><%= passenger.passenger_name %></li>
+              <li><%= passenger.passport_number %></li>
+              <% end %>
+            </ul>
+          </td>
+          <td>
+            <%= link_to booking, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-floating btn-large waves-effect waves-light blue" do %>
+              <i class="material-icons">delete</i>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
       </tbody>
     </table>
-    <%=link_to "BACK", "/", :class=>"btn waves-effect waves-light blue"%>
+    <%=link_to "BACK", "/", :class=>"btn waves-effect waves-light blue back"%>
   </div>
 </div>

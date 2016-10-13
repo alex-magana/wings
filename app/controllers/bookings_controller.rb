@@ -1,6 +1,5 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
-  before_action :new_booking_params, only: [:new]
   before_action :booking_params, only: [:confirm_booking, :create]
 
   def index
@@ -11,15 +10,12 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @flight = Flight.find(params[:flight_group].to_i)
+    @flight = Flight.find(new_booking_params[:flight_group].to_i)
     @booking = Booking.new
-    @booking.user_id = current_user
     @booking.flight = @flight
     @booking.booking_code = SecureRandom.hex(4).upcase
     if current_user
       @booking.email = current_user.email
-    end
-    if current_user
       @booking.user_id = current_user.id
     else
       @booking.user_id = 2
@@ -31,10 +27,19 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
+    @flight = Flight.find(booking_params[:flight_id])
+    @flight.available_seats = @flight.available_seats - @booking.passengers.size
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-        format.json { render :show, status: :created, location: @booking }
+        if @flight.save
+          # Tell the AppMailer to send an email after save
+          AppMailer.message_send(@booking).deliver_now
+          format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
+          format.json { render :show, status: :created, location: @booking }
+        else
+          format.html { render :new }
+          format.json { render json: @booking.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :new }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
@@ -92,7 +97,7 @@ class BookingsController < ApplicationController
   private
 
     def new_booking_params
-      params.require(:flight_group)
+      params.permit(:flight_group)
     end
 
     def set_booking

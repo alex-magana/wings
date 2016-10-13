@@ -44,9 +44,29 @@ input:-webkit-autofill {
 
 .back {
   display: inherit !important;
+  margin-top: 10px;
   margin-bottom: 15px !important;
 }
 
 .remove {
   margin-bottom: 10px;
+}
+
+#available {
+  padding: 70px;
+  margin-left: 10.66667% !important;
+}
+
+.past {
+  height: 90% !important;
+  overflow-y: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.past-child {
+  overflow-y: auto !important;
+  padding: 70px !important;
+  width: 100% !important;
+  margin-left: auto !important;
 }

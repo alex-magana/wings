@@ -30,3 +30,16 @@ input[type=radio]:checked, input[type=radio]:not(:checked) {
   left: 0px;
   visibility: visible;
 }
+
+input[type=text].invalid {
+  border-bottom: 1px solid #9e9e9e !important;
+  box-shadow: none !important;
+}
+
+.picker__weekday-display, .picker__date-display {
+  background-color: #2196F3 !important;
+}
+
+.picker__today, .picker__close {
+  color: #2196F3 !important;
+}
