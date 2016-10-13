@@ -14156,12 +14156,6 @@ Airport.create!([
   {airport_name: "Deer Harbor Seaplane", city: "Deer Harbor", country: "United States", iata_faa_code: "DHB", icao_code: "\\N", latitude: "48.618397", longitude: "-123.00596", altitude: "0.0", timezone: "-8", dst: "A", tz_database_timezone: "America/Los_Angeles", is_deleted: false},
   {airport_name: "San Diego Old Town Transit Center", city: "San Diego", country: "United States", iata_faa_code: "OLT", icao_code: "\\N", latitude: "32.7552", longitude: "-117.1995", altitude: "0.0", timezone: "-8", dst: "A", tz_database_timezone: "America/Los_Angeles", is_deleted: false}
 ])
-Booking.create!([
-  {booking_code: "8BF89F19", is_deleted: nil, flight_id: 9, user_id: 2, email: "gatobumalex@gmail.com"},
-  {booking_code: "31E3E8D0", is_deleted: nil, flight_id: 3, user_id: 2, email: "gatobumalex@gmail.com"},
-  {booking_code: "EC43E849", is_deleted: nil, flight_id: 62, user_id: 12, email: "gatobumalex@gmail.com"},
-  {booking_code: "C9AFA54A", is_deleted: nil, flight_id: 14, user_id: 12, email: "gatobumalex@gmail.com"}
-])
 Flight.create!([
   {flight_code: "RU", airline_id: 666, airline_code: "", source_airport_id: 1, source_airport: "", destination_airport_id: 2, destination_airport: "", gate_id: 0, departure_date: "2016-10-22 20:40:07", arrival_date: "2016-01-06 02:31:40", cost: "567.0", capacity: 306, available_seats: 316, codeshare: "", stops: 0, equipment: "", is_deleted: false},
   {flight_code: "ID", airline_id: 800, airline_code: "", source_airport_id: 529, source_airport: "", destination_airport_id: 765, destination_airport: "", gate_id: 0, departure_date: "2016-01-28 14:39:48", arrival_date: "2016-12-23 01:52:46", cost: "315.0", capacity: 303, available_seats: 426, codeshare: "", stops: 0, equipment: "", is_deleted: false},
@@ -15164,6 +15158,22 @@ Flight.create!([
   {flight_code: "CN", airline_id: 444, airline_code: "", source_airport_id: 665, source_airport: "", destination_airport_id: 142, destination_airport: "", gate_id: 0, departure_date: "2016-07-26 05:36:13", arrival_date: "2016-01-09 03:26:00", cost: "189.0", capacity: 228, available_seats: 457, codeshare: "", stops: 0, equipment: "", is_deleted: false},
   {flight_code: "CN", airline_id: 745, airline_code: "", source_airport_id: 639, source_airport: "", destination_airport_id: 663, destination_airport: "", gate_id: 0, departure_date: "2016-02-19 19:41:44", arrival_date: "2016-04-28 12:47:01", cost: "126.0", capacity: 221, available_seats: 391, codeshare: "", stops: 0, equipment: "", is_deleted: false}
 ])
+Role.create!([
+  {role_name: "ADMIN"},
+  {role_name: "N_USER"},
+  {role_name: "WALK_IN"}
+])
+User.create!([
+  {first_name: "ADMIN", middle_name: "ADMIN2", last_name: "ADMIN3", email: "admin@flightset.com", password: nil, role_id: 1},
+  {first_name: "WALKIN", middle_name: "WALKIN2", last_name: "WALKIN3", email: "walkin@filghtset.com", password: nil, role_id: 3},
+  {first_name: "ALEX", middle_name: "MAGANA", last_name: "GATOBU", email: "gatobumalex@gmail.com", password: "1234567890", role_id: 2}
+])
+Booking.create!([
+  {booking_code: "8BF89F19", is_deleted: nil, flight_id: 9, user_id: 2, email: "gatobumalex@gmail.com"},
+  {booking_code: "31E3E8D0", is_deleted: nil, flight_id: 3, user_id: 2, email: "gatobumalex@gmail.com"},
+  {booking_code: "EC43E849", is_deleted: nil, flight_id: 62, user_id: 12, email: "gatobumalex@gmail.com"},
+  {booking_code: "C9AFA54A", is_deleted: nil, flight_id: 14, user_id: 12, email: "gatobumalex@gmail.com"}
+])
 Passenger.create!([
   {passenger_name: "ALEX MAGANA GATOBU", passport_number: "TY3678UY25", booking_id: 10},
   {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 11},
@@ -15174,14 +15184,4 @@ Passenger.create!([
   {passenger_name: "JANE KWAMBOKA ", passport_number: "23871DHF421RF", booking_id: 17},
   {passenger_name: "THOMAS BARNADO", passport_number: "TH43NFH4134", booking_id: 18},
   {passenger_name: "BERNARD KANYOLO", passport_number: "FI322ERRE3434FTER", booking_id: 19}
-])
-Role.create!([
-  {role_name: "ADMIN"},
-  {role_name: "N_USER"},
-  {role_name: "WALK_IN"}
-])
-User.create!([
-  {first_name: "ADMIN", middle_name: "ADMIN2", last_name: "ADMIN3", email: "admin@flightset.com", password: nil, role_id: 1},
-  {first_name: "WALKIN", middle_name: "WALKIN2", last_name: "WALKIN3", email: "walkin@filghtset.com", password: nil, role_id: 3},
-  {first_name: "ALEX", middle_name: "MAGANA", last_name: "GATOBU", email: "gatobumalex@gmail.com", password: "1234567890", role_id: 2}
 ])
