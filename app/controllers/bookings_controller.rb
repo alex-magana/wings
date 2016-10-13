@@ -50,6 +50,8 @@ class BookingsController < ApplicationController
   def update
     respond_to do |format|
       if @booking.update(booking_params)
+        # Tell the AppMailer to send an email after update
+        AppMailer.message_send(@booking).deliver_now
         format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
         format.json { render :show, status: :ok, location: @booking }
       else
