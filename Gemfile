@@ -25,8 +25,8 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem "figaro"
 gem 'materialize-sass', '~> 0.96.1'
-
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
 
 # Use Capistrano for deployment

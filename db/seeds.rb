@@ -3027,17 +3027,17 @@ User.create!([
 Booking.create!([
   {booking_code: "8BF89F19", is_deleted: nil, flight_id: 9, user_id: 2, email: "gatobumalex@gmail.com"},
   {booking_code: "31E3E8D0", is_deleted: nil, flight_id: 3, user_id: 2, email: "gatobumalex@gmail.com"},
-  {booking_code: "EC43E849", is_deleted: nil, flight_id: 62, user_id: 12, email: "gatobumalex@gmail.com"},
-  {booking_code: "C9AFA54A", is_deleted: nil, flight_id: 14, user_id: 12, email: "gatobumalex@gmail.com"}
+  {booking_code: "EC43E849", is_deleted: nil, flight_id: 62, user_id: 2, email: "gatobumalex@gmail.com"},
+  {booking_code: "C9AFA54A", is_deleted: nil, flight_id: 14, user_id: 2, email: "gatobumalex@gmail.com"}
 ])
 Passenger.create!([
-  {passenger_name: "ALEX MAGANA GATOBU", passport_number: "TY3678UY25", booking_id: 10},
-  {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 11},
-  {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 12},
-  {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 13},
-  {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 14},
-  {passenger_name: "ALEX MUGAMBI", passport_number: "QW78DG29HH32", booking_id: 17},
-  {passenger_name: "JANE KWAMBOKA ", passport_number: "23871DHF421RF", booking_id: 17},
-  {passenger_name: "THOMAS BARNADO", passport_number: "TH43NFH4134", booking_id: 18},
-  {passenger_name: "BERNARD KANYOLO", passport_number: "FI322ERRE3434FTER", booking_id: 19}
+  {passenger_name: "ALEX MAGANA GATOBU", passport_number: "TY3678UY25", booking_id: 1},
+  {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 1},
+  {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 1},
+  {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 2},
+  {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 2},
+  {passenger_name: "ALEX MUGAMBI", passport_number: "QW78DG29HH32", booking_id: 3},
+  {passenger_name: "JANE KWAMBOKA ", passport_number: "23871DHF421RF", booking_id: 3},
+  {passenger_name: "THOMAS BARNADO", passport_number: "TH43NFH4134", booking_id: 4},
+  {passenger_name: "BERNARD KANYOLO", passport_number: "FI322ERRE3434FTER", booking_id: 4}
 ])
