@@ -17,4 +17,20 @@ class Booking < ApplicationRecord
   validates :email,
             presence: true,
             format: { with: VALID_REGEX_EMAIL }
+
+  scope :past_bookings, -> (params) do
+    joins("INNER JOIN flights ON flights.id = bookings.flight_id")
+    .where("bookings.user_id = ?", params.id)
+    .select("bookings.*, flights.flight_code, flights.airline_code, flights.departure_date, flights.arrival_date")
+  end
+
+  scope :search_booking_write, -> (params) do
+    where("bookings.booking_code = ?", params[:booking_code]).first
+  end
+
+  scope :search_booking_read, -> (params) do
+    joins("INNER JOIN flights ON flights.id = bookings.flight_id")
+    .where("bookings.booking_code = ?", params[:booking_code])
+    .select("bookings.*, flights.flight_code, flights.airline_code, flights.departure_date, flights.arrival_date")
+  end
 end
