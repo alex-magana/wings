@@ -1,14 +1,11 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
-  before_action :booking_params, only: [:confirm_booking, :create]
 
   def index
     @bookings = Booking.all
   end
-
   def show
   end
-
   def new
     @flight = Flight.find(new_booking_params[:flight_group].to_i)
     @booking = Booking.new
@@ -21,10 +18,8 @@ class BookingsController < ApplicationController
       @booking.user_id = 2
     end
   end
-
   def edit
   end
-
   def create
     @booking = Booking.new(booking_params)
     @flight = Flight.find(booking_params[:flight_id])
@@ -46,7 +41,6 @@ class BookingsController < ApplicationController
       end
     end
   end
-
   def update
     respond_to do |format|
       if @booking.update(booking_params)
@@ -60,7 +54,6 @@ class BookingsController < ApplicationController
       end
     end
   end
-
   def destroy
     @booking.destroy
     respond_to do |format|
@@ -68,45 +61,36 @@ class BookingsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
   def confirm_booking
     @booking = Booking.new(booking_params)
   end
-
   def past_bookings
-    @bookings = Booking.select("bookings.*, flights.flight_code, flights.airline_code, flights.departure_date, flights.arrival_date")
-                       .joins("INNER JOIN flights ON flights.id = bookings.flight_id")
-                       .where("bookings.user_id = ?", current_user)
+    @bookings = Booking.past_bookings(current_user)
     render '_past_bookings'
   end
-
   def manage_bookings
     render '_search_booking'
   end
-
   def search_booking
     if current_user
-      @booking = Booking.where("bookings.booking_code = ?", params[:booking_code]).first
+      @booking = Booking.search_booking_write(search_booking_params)
       render 'edit'
     else
-      @booking = Booking.select("bookings.*, flights.flight_code, flights.airline_code, flights.departure_date, flights.arrival_date")
-                         .joins("INNER JOIN flights ON flights.id = bookings.flight_id")
-                         .where("bookings.booking_code = ?", params[:booking_code])
+      @booking = Booking.search_booking_read(search_booking_params)
       render '_search_results'
     end
   end
-
   private
-
     def new_booking_params
       params.permit(:flight_group)
     end
-
-    def set_booking
-      @booking = Booking.find(params[:id])
-    end
-
     def booking_params
       params.require(:booking).permit(:user_id, :flight_id, :booking_code, :email, passengers_attributes: [:id, :passenger_name, :passport_number, :_destroy])
+    end
+    def search_booking_params
+      params.permit(:booking_code)
+    end
+    def set_booking
+      @booking = Booking.find(params[:id])
     end
 end
