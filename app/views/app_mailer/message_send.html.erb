@@ -7,15 +7,17 @@
     <h1>Welcome to flightset.com,
       <%= @booking.email %></h1>
     <p>
-      You have successfully booked a flight on flightset.com, your booking details are as follows:
-      <%= @booking.booking_code %>.<br>
+      You have successfully booked a flight on flightset.com, your booking details are as follows:<br>
+      <label>Booking Code:</label>
+      <%= @booking.booking_code %><br>
       <ul>
         <%= @booking.passengers.each do |passenger| %>
+        <% binding.pry %>
         <li>
-          passenger.passenger_name
+          <%= passenger.passenger_name %>
         </li>
         <li>
-          passenger.passport_number
+          <%= passenger.passport_number %>
         </li>
         <% end %>
       </ul>

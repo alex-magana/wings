@@ -6,8 +6,8 @@ your booking details are as follows:
 <%= @booking.booking_code %>.<br>
 
 <%= @booking.passengers.each do |passenger| %>
-  passenger.passenger_name
-  passenger.passport_number
+  <%= passenger.passenger_name %>
+  <%= passenger.passport_number %>
 <% end %>
 
 To visit the site, just follow this link: <%= @url %>.
