@@ -14,29 +14,25 @@ RSpec.describe FlightsController, type: :controller do
       expect(response).to render_template('index')
     end
   end
-
   describe '#search_flights' do
-    # before(:each) { get :search_flights }
-    # it { should permit(:flight_params).for(:search_flights) }
-    # it 'assigns flight record to flights' do
-      # airline = create(:airline)
-      # flight = create(:flight, airline_id: airline.id)
-      # params = flight_params
-      # expect(assigns(:flights)).to eq Flight.flights_available(params)
-    # end
-    # it 'returns a status code of 200' do
-      # get :search_flights
-      # expect(response.status).to eq 200
-    # end
-    # it 'renders the search_flights template' do
-      # get :search_flights
-      # expect(response).to render_template('search_flights')
-    # end
+    let(:airline) { create :airline }
+    subject(:flight) { create :flight, airline_id: airline.id }
+    before(:each) do
+      get :search_flights, params: { origin: flight.source_airport_id, destination: flight.destination_airport_id, passenger: flight.available_seats, flight_date_submit: flight.departure_date }, format: :js
+    end
+    let(:params) { flight_params }
+    it 'assigns flight record to flights' do
+      expect(assigns(:flights)).to eq Flight.search_flights(params)
+    end
+    it 'returns a status code of 200' do
+      expect(response.status).to eq 200
+    end
+    it 'renders the search_flights template' do
+      expect(response).to render_template('search_flights')
+    end
   end
-
   private
-
     def flight_params
-      params.permit(:origin, :destination, :passenger, :flight_date, :flight_date_submit, :flight_group)
+      controller.params.permit(:origin, :destination, :passenger, :flight_date, :flight_date_submit, :flight_group)
     end
 end
