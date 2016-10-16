@@ -5,16 +5,12 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
-
   def show
   end
-
   def new
   end
-
   def edit
   end
-
   def create
     @user = User.new(user_params)
     @user.role_id = 2
@@ -28,17 +24,13 @@ class UsersController < ApplicationController
       end
     end
   end
-
   def update
   end
-
   def destroy
   end
-
   def login
     render 'login'
   end
-
   def user_authenticate
     @user = User.where("email = ? and password = ?", user_params[:email], user_params[:password]).first
     if @user.email == user_params[:email]
@@ -46,22 +38,16 @@ class UsersController < ApplicationController
       redirect_to flights_path
     end
   end
-
   def logout
     session[:user_id] = nil
     redirect_to root_path
   end
-
   def reset_password
-
   end
-
   private
-
     def set_user
       @user = User.find(params[:id])
     end
-
     def user_params
       params.permit(:first_name, :middle_name, :last_name, :email, :password, :role_id)
     end
