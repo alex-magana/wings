@@ -1,5 +1,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/andela-amagana/wings/badge.svg?branch=develop)](https://coveralls.io/github/andela-amagana/wings?branch=develop)
 
+[![Code Climate](https://codeclimate.com/github/andela-amagana/wings/badges/gpa.svg)](https://codeclimate.com/github/andela-amagana/wings)
+
+[![Issue Count](https://codeclimate.com/github/andela-amagana/wings/badges/issue_count.svg)](https://codeclimate.com/github/andela-amagana/wings)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
