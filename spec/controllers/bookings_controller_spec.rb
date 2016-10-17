@@ -29,10 +29,10 @@ RSpec.describe BookingsController, type: :controller do
     end
   end
   describe "#new" do
-    subject(:flight) { create :flight }
+    let(:flight) { create :flight }
     context 'when user is not logged in' do
       let(:user) { create :user }
-      let(:booking) { create :booking, user_id: user.id }
+      subject(:booking) { create :booking, user_id: user.id }
       let(:selected_flight) { Flight.find(flight.id) }
       before(:each) { get :new, params: { flight_group: flight.id } }
       it 'assigns flight record to flight' do
