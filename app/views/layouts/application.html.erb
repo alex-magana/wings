@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Wings</title>
+    <title>Flightset</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -18,6 +18,9 @@
               <i class="material-icons">menu</i>
             </a>
             <ul id="dropdown-top" class="dropdown-content">
+              <li>
+                <a href="<%= root_path %>">Reserve flight</a>
+              </li>
               <% if current_user %>
               <li>
                 <a href="<%= past_bookings_path %>">Past bookings</a>
@@ -50,7 +53,7 @@
                 </a>
               </li>
               <li class="top-right">
-                <a href="<%= signup_path %>" class="top-right">
+                <a href="<%= new_user_path %>" class="top-right">
                   <i class="material-icons menu-option top-right">input</i>
                   Sign Up
                 </a>
@@ -94,7 +97,7 @@
                 <div class="divider"></div>
               </li>
               <li>
-                <a href="<%= signup_path %>">
+                <a href="<%= new_user_path %>">
                   <i class="material-icons menu-option">input</i>
                   Sign Up
                 </a>
@@ -112,6 +115,9 @@
                     </a>
                     <div class="collapsible-body">
                       <ul>
+                        <li>
+                          <a href="<%= root_path %>">Reserve flight</a>
+                        </li>
                         <li>
                           <% if current_user %>
                           <a href="<%= past_bookings_path %>">Past bookings</a>
