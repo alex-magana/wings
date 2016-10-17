@@ -30,4 +30,8 @@ class User < ApplicationRecord
   validates :password,
             presence: true,
             length: { minimum: 6}
+
+  scope :user_authenticate, -> (params) do
+    where("email = ? and password = ?", params[:email], params[:password]).first
+  end
 end
