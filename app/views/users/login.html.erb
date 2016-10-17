@@ -1,46 +1,45 @@
 <div class="row" id="login-page">
   <div class="col s12 z-depth-6 card-panel" id="login-details">
-    <form class="login-form" action="<%= user_authenticate_path %>" method="post">
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <%= form_tag(user_authenticate_path, method: "post", class:"login-form") do %>
       <div class="row margin">
         <div class="input-field col s12">
           <i class="mdi-social-person-outline prefix"></i>
-          <input class="validate" name="email" type="email">
-          <label for="email" data-error="Wrong" class="center-align">Email</label>
+          <%= email_field_tag "email", nil, class: "validate", required: true %>
+          <%= label_tag "email", "Email", class: "center-align", :data => { :error => 'Wrong' } %>
         </div>
       </div>
       <div class="row margin">
         <div class="input-field col s12">
           <i class="mdi-action-lock-outline prefix"></i>
-          <input name="password" type="password">
-          <label for="password">Password</label>
+          <%= password_field_tag :password, nil, required: true %>
+          <%= label_tag(:password, "Password") %>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12 m12 l12  login-text">
-          <input type="checkbox" id="remember-me"/>
-          <label for="remember-me">Remember me</label>
+        <div class="input-field col s12 m12 l12 login-text">
+          <%= check_box_tag(:"remember-me") %>
+          <%= label_tag(:"remember-me", "Remember me") %>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <button type="submit" class="submit btn waves-effect waves-light blue col s12">
-            Login
-          </button>
+          <%= button_tag(type: "submit", class: "submit btn waves-effect waves-light blue col s12", disable_with: "Authenticating...") do %>
+           Login
+          <% end %>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6 m6 l6">
           <p class="margin medium-small">
-            <a href="<%= signup_path %>">Register Now!</a>
+            <%= link_to "Register Now!", new_user_path %>
           </p>
         </div>
         <div class="input-field col s6 m6 l6">
           <p class="margin right-align medium-small">
-            <a href="<%= reset_password_path %>">Forgot password?</a>
+            <%= link_to "Forgot password?", reset_password_path %>
           </p>
         </div>
       </div>
-    </form>
+    <% end %>
   </div>
 </div>
