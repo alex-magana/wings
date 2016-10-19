@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.feature 'AnonymousUserUsesTheApp', js: true do
   scenario 'User visits the website' do
     visit root_path
-    expect(find_all("li.top-right a").first.text).to have_content("Sign In")
-    sleep(1)
-    expect(find_all("li.top-right a")[1].text).to have_content("Sign Up")
-    sleep(1)
+    within(".main-nav") do
+      expect(find_all("li.top-right a").first).to have_content("Sign In")
+      expect(find_all("li.top-right a")[1]).to have_content("Sign Up")
+    end
     expect(page).to_not have_content("Past bookings")
   end
   scenario 'User searches for a flight' do
