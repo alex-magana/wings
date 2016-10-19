@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.feature 'AnonymousUserUsesTheApp', js: true do
   scenario 'User visits the website' do
     visit root_path
-    expect(page).to have_content("Sign In")
+    sleep(0.5)
+    expect(find_all("li.top-right a").first.text).to eq "lock_open Sign In"
+    sleep(0.10)
     expect(page).to have_content("Sign Up")
     expect(page).to_not have_content("Past bookings")
   end
