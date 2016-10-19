@@ -31,10 +31,13 @@ class UsersController < ApplicationController
   def login
   end
   def user_authenticate
-    @user = User.user_authenticate(user_params)
-    if @user.email == user_params[:email]
+    @user = User.user_authenticate(user_params).first
+    if @user.nil? == false
       session[:user_id] = @user.id
       redirect_to flights_path
+    else
+      flash[:notice] = "Invalid username or password."
+      redirect_to login_path
     end
   end
   def logout
