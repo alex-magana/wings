@@ -32,6 +32,6 @@ class User < ApplicationRecord
             length: { minimum: 6}
 
   scope :user_authenticate, -> (params) do
-    where("email = ? and password = ?", params[:email], params[:password]).first
+    where("email = ? and password = ?", params[:email], params[:password])
   end
 end
