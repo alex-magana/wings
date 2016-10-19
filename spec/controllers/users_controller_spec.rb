@@ -52,11 +52,12 @@ RSpec.describe UsersController, type: :controller do
     end
   end
   describe "#create" do
-    subject(:user) { create :user }
     let(:user_create_request) do
-      post :create, params: { first_name: user.first_name,
-        middle_name: user.middle_name, last_name: user.last_name,
-        email: Faker::Internet.email, password: user.password, role_id: 2 }
+      post :create, params: { first_name: Faker::Name.first_name,
+        middle_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        email: Faker::Internet.email, password: Faker::Internet.password(8),
+        role_id: 2 }
     end
     it "creates new user" do
       expect { user_create_request }.to change(User,:count).by(1)
