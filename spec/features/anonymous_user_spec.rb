@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'AnonymousUserUsesTheApp', js: true do
+  Capybara.default_wait_time = 10
   scenario 'User visits the website' do
     visit root_path
     within(".main-nav") do
