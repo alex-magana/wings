@@ -12,7 +12,6 @@
       <%= @booking.booking_code %><br>
       <ul>
         <%= @booking.passengers.each do |passenger| %>
-        <% binding.pry %>
         <li>
           <%= passenger.passenger_name %>
         </li>
