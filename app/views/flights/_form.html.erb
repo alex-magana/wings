@@ -1,9 +1,9 @@
 <%= form_tag(search_flights_path, remote: true, method: "get", id: "form-preferences") do %>
-  <%= select_tag "origin", options_from_collection_for_select(airports, "id", "airport_name"), class: "col s2 validate", prompt: "Origin" %>
-  <%= select_tag "destination", options_from_collection_for_select(airports, "id", "airport_name"), class: "col s2 validate", prompt: "Destination" %>
-  <%= select_tag "passenger", options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9]]), class: "col s2 validate", prompt: "No. of passengers" %>
-  <%= text_field_tag "flight_date", nil, class: "datepicker col s2 validate", placeholder: "Date" %>
-  <%= button_tag(type: "submit", class: "btn-floating btn-large waves-effect waves-light blue", disable_with: "Searching...") do %>
+  <%= select_tag "origin", options_from_collection_for_select(airports, "id", "airport_name"), class: "col s2 validate", prompt: "Origin", id: "origin" %>
+  <%= select_tag "destination", options_from_collection_for_select(airports, "id", "airport_name"), class: "col s2 validate", prompt: "Destination", id: "destination" %>
+  <%= select_tag "passenger", options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9]]), class: "col s2 validate", prompt: "No. of passengers", id: "passenger" %>
+  <%= text_field_tag "flight_date", nil, class: "datepicker col s2 validate", placeholder: "Date", id: "flight_date" %>
+  <%= button_tag(type: "submit", class: "btn-floating btn-large waves-effect waves-light blue", disable_with: "Searching...", id: "search") do %>
    <i class="material-icons">search</i>
   <% end %>
 <% end %>
