@@ -3,8 +3,8 @@
     "coverage": {
       "/Users/alexmagana/Documents/GitHub/wings/spec/features/anonymous_user_spec.rb": [
         1,
-        null,
         1,
+        null,
         1,
         1,
         1,
@@ -510,6 +510,6 @@
         null
       ]
     },
-    "timestamp": 1476913247
+    "timestamp": 1476914550
   }
 }

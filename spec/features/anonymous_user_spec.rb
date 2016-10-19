@@ -1,7 +1,7 @@
 require 'rails_helper'
+Capybara.default_wait_time = 15
 
 RSpec.feature 'AnonymousUserUsesTheApp', js: true do
-  Capybara.default_wait_time = 10
   scenario 'User visits the website' do
     visit root_path
     expect(find_all("ul.main-nav li.top-right a").first).to have_content("Sign In")
