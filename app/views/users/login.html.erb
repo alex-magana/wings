@@ -1,5 +1,14 @@
 <div class="row" id="login-page">
   <div class="col s12 z-depth-6 card-panel" id="login-details">
+    <% if flash[:notice] %>
+    <div class="row margin">
+      <div class="input-field col s12">
+        <p>
+          <%= flash[:notice] %>
+        </p>
+      </div>
+    </div>
+    <% end %>
     <%= form_tag(user_authenticate_path, method: "post", class:"login-form") do %>
       <div class="row margin">
         <div class="input-field col s12">
