@@ -4,10 +4,8 @@ RSpec.feature 'AnonymousUserUsesTheApp', js: true do
   Capybara.default_wait_time = 10
   scenario 'User visits the website' do
     visit root_path
-    within(".main-nav") do
-      expect(find_all("li.top-right a").first).to have_content("Sign In")
-      expect(find_all("li.top-right a")[1]).to have_content("Sign Up")
-    end
+    expect(find_all("ul.main-nav li.top-right a").first).to have_content("Sign In")
+    expect(find_all("ul.main-nav li.top-right a")[1]).to have_content("Sign Up")
     expect(page).to_not have_content("Past bookings")
   end
   scenario 'User searches for a flight' do
