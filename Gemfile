@@ -49,6 +49,7 @@ group :development, :test do
   gem 'launchy'
   gem 'seed_dump'
   gem "codeclimate-test-reporter", group: :test, require: nil
+  gem 'selenium-webdriver'
 end
 
 group :development do
