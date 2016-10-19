@@ -80,12 +80,9 @@ RSpec.describe BookingsController, type: :controller do
   end
   describe "#create" do
     let(:user) { create :user }
-    subject(:booking) { create :booking, user_id: user.id }
-    let(:passenger) { create :passenger, booking: booking }
     let(:booking_create_request) do
-      post :create, params: { booking: attributes_for(:booking, user_id: booking.user_id,
-       flight_id: booking.flight_id,
-       booking_code: booking.booking_code, email: booking.email, passengers: passenger) }
+      post :create, params: { booking: attributes_for(:booking, user_id: user.id,
+        passengers: attributes_for(:passenger)) }
     end
     it "create new booking" do
       expect { booking_create_request }.to change(Booking,:count).by(1)
@@ -96,7 +93,7 @@ RSpec.describe BookingsController, type: :controller do
     end
     it 'redirects to the show view' do
       booking_create_request
-      expect(response).to redirect_to(booking)
+      expect(response).to redirect_to(assigns(:booking))
     end
   end
   describe "#update" do
@@ -124,12 +121,13 @@ RSpec.describe BookingsController, type: :controller do
   end
   describe "#destroy" do
     let(:user) { create :user }
-    let(:booking_destroy_request) do
-      delete :destroy, id: booking
-    end
     subject(:booking) { create :booking, user_id: user.id }
+    let(:booking_destroy_request) do
+      delete :destroy, params: { id: booking.id }
+    end
     it "deletes a booking" do
-      expect{ booking_destroy_request }.to change(Booking,:count).by(-1)
+      booking_destroy_request
+      expect(Booking.where(id: booking.id)).not_to exist
     end
     it 'returns a status code of 200' do
       booking_destroy_request
