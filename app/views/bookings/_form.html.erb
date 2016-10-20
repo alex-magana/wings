@@ -31,7 +31,7 @@
   <% if current_user %>
   <%= f.email_field :email, readonly: true %>
   <% else %>
-  <%= f.email_field :email %>
+  <%= f.email_field :email, class: "validate", required: true %>
   <% end %>
 </div>
 <h6 class="align">Passengers</h6>

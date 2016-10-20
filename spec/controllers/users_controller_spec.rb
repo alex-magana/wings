@@ -1,19 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  describe "#index" do
-    before(:each) { get :index }
-    it 'assigns user records to users' do
-      create(:user)
-      expect(assigns(:users)).to eq User.all
-    end
-    it 'returns a status code of 200' do
-      expect(response.status).to eq 200
-    end
-    it 'renders the index template' do
-      expect(response).to render_template('index')
-    end
-  end
   describe "#show" do
     subject(:user) { create :user }
     before(:each) do
@@ -53,11 +40,11 @@ RSpec.describe UsersController, type: :controller do
   end
   describe "#create" do
     let(:user_create_request) do
-      post :create, params: { first_name: Faker::Name.first_name,
+      post :create, params: { user: attributes_for(:user,
+        first_name: Faker::Name.first_name,
         middle_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
-        email: Faker::Internet.email, password: Faker::Internet.password(8),
-        role_id: 2 }
+        email: Faker::Internet.email, password: Faker::Internet.password(8)) }
     end
     it "creates new user" do
       expect { user_create_request }.to change(User,:count).by(1)

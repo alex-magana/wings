@@ -4,4 +4,9 @@ class AppMailer < ApplicationMailer
     @url = "https://flightset.herokuapp.com/"
     mail(to: @booking.email, subject: "Flightset. For the globetrotter")
   end
+  def password_send(user)
+    @user = user
+    @url = "https://flightset.herokuapp.com/"
+    mail(to: @user.email, subject: "Flightset. For the globetrotter")
+  end
 end

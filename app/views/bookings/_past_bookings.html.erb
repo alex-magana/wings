@@ -1,5 +1,14 @@
 <div class="row past" id="available-parent">
   <div class="col s10 offset-s1 past-child">
+    <% if flash[:notice] %>
+    <div class="row margin">
+      <div class="input-field col s12">
+        <p>
+          <%= flash[:notice] %>
+        </p>
+      </div>
+    </div>
+    <% else %>
     <table class="striped responsive-table centered">
       <thead>
         <tr>
@@ -40,6 +49,7 @@
         <% end %>
       </tbody>
     </table>
+    <% end %>
     <%=link_to "BACK", "/", :class=>"btn waves-effect waves-light blue back"%>
   </div>
 </div>

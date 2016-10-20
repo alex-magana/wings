@@ -8,7 +8,7 @@ class FlightsController < ApplicationController
     @flights = Flight.search_flights(flight_params)
     flash[:notice] = nil
     if @flights.empty?
-      flash[:notice] = "There are no available flights"
+      flash[:notice] = "There are no available flights."
       respond_to do |format|
         format.js {render layout: false}
       end
@@ -17,6 +17,9 @@ class FlightsController < ApplicationController
         format.js {render layout: false}
       end
     end
+  end
+  def home
+    redirect_to root_url
   end
   private
     def flight_params

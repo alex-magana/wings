@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 Capybara.default_wait_time = 15
 
 RSpec.feature 'AnonymousUserUsesTheApp', js: true do

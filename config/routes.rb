@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   get "login" => "users#login", as: "login"
   post "user_authenticate" => "users#user_authenticate", as: "user_authenticate"
   delete "logout" => "users#logout", as: "logout"
-  post "reset_password" => "user#reset_password", as: "reset_password"
+  get "reset_password" => "users#reset_password", as: "reset_password"
+  post "send_reset_email" => "users#send_reset_email", as: "send_reset_email"
   get "search_flights" => "flights#search_flights", as: "search_flights", defaults: { format: 'js' }
+  get "home" => "flights#home", as: "home"
   post "confirm_booking" => "bookings#confirm_booking", as: "confirm_booking"
   get "past_bookings" => "bookings#past_bookings", as: "past_bookings"
   get "manage_bookings" => "bookings#manage_bookings", as: "manage_bookings"

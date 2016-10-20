@@ -34,4 +34,8 @@ class User < ApplicationRecord
   scope :user_authenticate, -> (params) do
     where("email = ? and password = ?", params[:email], params[:password])
   end
+
+  scope :check_email, -> (params) do
+    where("email = ?", params[:email])
+  end
 end

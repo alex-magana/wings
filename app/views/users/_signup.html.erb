@@ -12,6 +12,16 @@
       </ul>
     </div>
     <% end %>
+    <% if flash[:notice] %>
+    <div class="row margin">
+      <div class="input-field col s12">
+        <p>
+          <%= flash[:notice] %>
+        </p>
+      </div>
+    </div>
+    <% end %>
+    <%= f.hidden_field :role_id %>
     <div class="row">
       <div class="input-field col s4">
         <i class="material-icons prefix">assignment_ind</i>

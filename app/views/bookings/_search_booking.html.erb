@@ -10,3 +10,14 @@
     </form>
   </div>
 </div>
+<div class="row">
+  <% if flash[:notice] == "No reservations available." %>
+  <div class="row margin">
+    <div class="input-field col s12">
+      <p>
+        <%= flash[:notice] %>
+      </p>
+    </div>
+  </div>
+  <% end %>
+</div>

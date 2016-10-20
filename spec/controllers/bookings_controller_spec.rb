@@ -190,6 +190,7 @@ RSpec.describe BookingsController, type: :controller do
       subject(:booking) { create :booking, user_id: user.id }
       before(:each) do
         stub_current_user(user)
+        booking.booking_code = "C9AFA54A"
         get :search_booking, params: { booking_code: booking.booking_code }
       end
       let(:params) { search_booking_params }
@@ -214,7 +215,8 @@ RSpec.describe BookingsController, type: :controller do
       let(:params) { search_booking_params }
       let(:available_booking) { Booking.search_booking_read(params) }
       it 'assigns booking record to booking' do
-        expect(assigns(:booking)).to eq available_booking
+        booking = assigns(:booking)
+        expect(booking.user_id).to eq available_booking.user_id
       end
       it 'returns a status code of 200' do
         expect(response.status).to eq 200

@@ -66,18 +66,33 @@ class BookingsController < ApplicationController
   end
   def past_bookings
     @bookings = Booking.past_bookings(current_user)
-    render '_past_bookings'
+    if @booking.nil? == false
+      render '_past_bookings'
+    else
+      flash[:notice] = "There are no past bookings."
+      render '_past_bookings'
+    end
   end
   def manage_bookings
     render '_search_booking'
   end
   def search_booking
     if current_user
-      @booking = Booking.search_booking_write(search_booking_params)
-      render 'edit'
+      @booking = Booking.search_booking_write(search_booking_params).first
+      if @booking.nil? == false
+        render 'edit'
+      else
+        flash[:notice] = "No reservations available."
+        redirect_to manage_bookings_path
+      end
     else
-      @booking = Booking.search_booking_read(search_booking_params)
-      render '_search_results'
+      @booking = Booking.search_booking_read(search_booking_params).first
+      if @booking.nil? == false
+        render '_search_results'
+      else
+        flash[:notice] = "No reservations available."
+        redirect_to manage_bookings_path
+      end
     end
   end
   private

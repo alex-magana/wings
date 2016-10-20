@@ -16,25 +16,25 @@
       <tbody>
         <div class="row">
 
-          <% @booking.each do |booking| %>
+
           <tr>
-            <td><%= booking.booking_code %></td>
-            <td><%= booking.email %></td>
-            <td><%= booking.created_at %></td>
-            <td>$<%= booking.flight_code %></td>
-            <td>$<%= booking.airline_code %></td>
-            <td>$<%= booking.departure_date %></td>
-            <td>$<%= booking.arrival_date %></td>
+            <td><%= @booking.booking_code %></td>
+            <td><%= @booking.email %></td>
+            <td><%= @booking.created_at %></td>
+            <td>$<%= @booking.flight_code %></td>
+            <td>$<%= @booking.airline_code %></td>
+            <td>$<%= @booking.departure_date %></td>
+            <td>$<%= @booking.arrival_date %></td>
             <td>
               <ul>
-                <% booking.passengers.each do |passenger| %>
+                <% @booking.passengers.each do |passenger| %>
                 <li><%= passenger.passenger_name %></li>
                 <li><%= passenger.passport_number %></li>
                 <% end %>
               </ul>
             </td>
           </tr>
-          <% end %>
+
         </div>
       </tbody>
     </table>
