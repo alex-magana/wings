@@ -1,6 +1,8 @@
-<h1>Editing Project</h1>
-
-<%= render 'form', booking: @booking %>
-
-<%= link_to 'Show', @booking %> |
-<%= link_to 'Back', "/" %>
+<div class="row" id="new-reservation" style="
+    padding-top: 7%;
+">
+  <div class="col s10 offset-s1 card-panel" id="option-fields">
+    <%= render 'form_edit', booking: @booking %>
+    <%= link_to 'Back', "/", class: "btn blue back" %>
+  </div>
+</div>
