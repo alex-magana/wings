@@ -11,14 +11,27 @@
 }
 
 #option-fields {
-  margin-top: 90px;
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
 }
 
 #available-container {
-  height: 80%;
+  height: 90%;
   margin-top: 20px;
-  margin-left: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
   overflow-y: auto;
+}
+
+#available-content {
+  height: 60em;
+  overflow-y: auto;
+}
+
+tbody {
+  background-color: #fff;
 }
 
 td, th {
