@@ -8,36 +8,41 @@
 </div>
 <% else %>
 <form action="<%= new_booking_path %>" method="get">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <table class="striped responsive-table centered">
-    <thead>
-      <tr>
-        <th data-field="name">AIRLINE</th>
-        <th data-field="name">DEPARTURE</th>
-        <th data-field="name">ARRIVAL</th>
-        <th data-field="price">COST</th>
-        <th data-field=""></th>
-      </tr>
-    </thead>
-    <tbody>
-      <div class="row">
-        <% @flights.each do |flight| %>
-        <tr>
-          <td><%= flight.airline_name %></td>
-          <td><%= flight.departure_date %></td>
-          <td><%= flight.arrival_date %></td>
-          <td>$<%= flight.cost %></td>
-          <td>
-            <input name="flight_group" type="radio" value="<%= flight.id %>" class="validate" required/>
-          </td>
-        </tr>
-        <% end %>
-      </div>
-    </tbody>
-  </table>
-  <div class="container row">
-    <div class="col s10 offset-s4">
-      <button class="btn waves-effect waves-light blue" type="submit" name="action" id="select-flight">Select flight
+  <div class="row">
+    <div class="col s12" id="available-content">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="passengers_qty" value="<%= passengers_qty %>">
+      <table class="striped responsive-table centered">
+        <thead>
+          <tr>
+            <th data-field="name">AIRLINE</th>
+            <th data-field="name">DEPARTURE</th>
+            <th data-field="name">ARRIVAL</th>
+            <th data-field="price">COST</th>
+            <th data-field=""></th>
+          </tr>
+        </thead>
+        <tbody>
+          <div class="row">
+            <% @flights.each do |flight| %>
+            <tr>
+              <td><%= flight.airline_name %></td>
+              <td><%= flight.departure_date %></td>
+              <td><%= flight.arrival_date %></td>
+              <td>$<%= flight.cost %></td>
+              <td>
+                <input name="flight_group" type="radio" value="<%= flight.id %>" class="validate" required/>
+              </td>
+            </tr>
+            <% end %>
+          </div>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s8 offset-s4">
+      <button class="btn blue" type="submit" name="action" id="select-flight">Select flight
         <i class="material-icons right">send</i>
       </button>
     </div>
