@@ -1,1 +1,1 @@
-$("#available-container").html("<%= escape_javascript(render partial: 'available_flights', locals: { flights: @flights } ) %>");
+$("#available-container").html("<%= escape_javascript(render partial: 'available_flights', locals: { flights: @flights, passengers_qty: passengers_qty } ) %>");
