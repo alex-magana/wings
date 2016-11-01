@@ -3,6 +3,7 @@
   <head>
     <title>Flightset</title>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,13 +14,13 @@
       <div class="navbar-fixed">
         <nav>
           <div class="nav-wrapper">
-            <a href="<%= home_path %>" class="brand-logo center">flightset</a>
+            <a href="<%= root_path %>" data-turbolinks="false" class="brand-logo center">flightset</a>
             <a href="#" data-activates="slide-out" class="button-collapse" id="menu">
               <i class="material-icons">menu</i>
             </a>
             <ul id="dropdown-top" class="dropdown-content">
               <li>
-                <a href="<%= root_path %>">Reserve flight</a>
+                <a href="<%= root_path %>" data-turbolinks="false">Reserve flight</a>
               </li>
               <% if current_user %>
               <li>
@@ -116,7 +117,7 @@
                     <div class="collapsible-body">
                       <ul>
                         <li>
-                          <a href="<%= root_path %>">Reserve flight</a>
+                          <a href="<%= root_path %>" data-turbolinks="false">Reserve flight</a>
                         </li>
                         <li>
                           <% if current_user %>
