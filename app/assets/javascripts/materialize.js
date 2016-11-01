@@ -1,10 +1,4 @@
 $(document).ready(function() {
-  $(".dropdown-button").dropdown();
-
-  $(".button-collapse").sideNav();
-
-  $('.collapsible').collapsible();
-
   $('select').material_select();
 
   $('.datepicker').pickadate({
@@ -14,3 +8,11 @@ $(document).ready(function() {
     selectYears: 15 // Creates a dropdown of 15 years to control year
   });
 });
+
+$(document).on('turbolinks:load', function() {
+  $(".dropdown-button").dropdown();
+
+  $(".button-collapse").sideNav();
+
+  $('.collapsible').collapsible();
+})
