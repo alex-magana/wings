@@ -1,10 +1,8 @@
 <div class="row" id="search-booking">
-  <div class="col s4 offset-s4">
+  <div class="col s9" id="search-booking-col">
     <form action="<%= search_booking_path %>" method="get">
-      <div class="search search-wrapper card" id="search-parent">
-        <input placeholder="Booking code" name="booking_code" id="search" type="text" class="validate">
-      </div>
-      <button class="btn-floating btn-large waves-effect waves-light blue" type="submit" name="action">
+      <input placeholder="Booking code" name="booking_code" id="search" type="text" class="validate">
+      <button class="btn-floating btn-large blue" type="submit" name="action">
         <i class="material-icons">search</i>
       </button>
     </form>
