@@ -5,9 +5,9 @@ Capybara.default_max_wait_time = 30
 RSpec.feature "AnonymousUserUsesTheApp", js: true do
   scenario "User visits the website" do
     visit root_path
-    sleep(3)
+    sleep(60)
     expect(page).to have_content("Sign In", count: 1)
-    sleep(3)
+    sleep(60)
     expect(page).to have_content("Sign Up", count: 1)
     expect(page).to_not have_content("Past bookings")
   end
