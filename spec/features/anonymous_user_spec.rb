@@ -20,7 +20,7 @@ RSpec.feature "AnonymousUserUsesTheApp", js: true do
     selected_flight = find_all("table tbody tr td input").first
     sleep(0.3)
     selected_flight.click
-    click_button("pickoption")
+    click_button("submit_option")
     expect(page).to have_content("ADD PASSENGER")
   end
 

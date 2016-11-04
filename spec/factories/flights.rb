@@ -16,5 +16,6 @@ FactoryGirl.define do
     stops 0
     equipment 0
     is_deleted 0
+    airline
   end
 end
