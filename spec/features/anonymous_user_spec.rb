@@ -3,11 +3,15 @@ require "rails_helper"
 Capybara.default_max_wait_time = 30
 
 RSpec.feature "AnonymousUserUsesTheApp", js: true do
+  before do
+    page.driver.browser.manage.window.maximize
+  end
+
   scenario "User visits the website" do
     visit root_path
-    sleep(60)
+    sleep(7)
     expect(page).to have_content("Sign In", count: 1)
-    sleep(60)
+    sleep(7)
     expect(page).to have_content("Sign Up", count: 1)
     expect(page).to_not have_content("Past bookings")
   end

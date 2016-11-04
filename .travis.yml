@@ -1,4 +1,3 @@
-sudo: required
 addons:
   firefox: "45.0"
 language: ruby
