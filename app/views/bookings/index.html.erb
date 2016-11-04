@@ -1,29 +1,57 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Bookings</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Flight Id</th>
-      <th>Booking Code</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bookings.each do |booking| %>
-      <tr>
-        <td><%= booking.flight_id %></td>
-        <td><%= booking.booking_code %></td>
-        <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="row past" id="available-parent">
+  <div class="col s10 offset-s1 past-child">
+    <% if flash[:notice] %>
+    <div class="row margin">
+      <div class="input-field col s12">
+        <p>
+          <%= flash[:notice] %>
+        </p>
+      </div>
+    </div>
+    <% else %>
+    <table class="striped responsive-table centered">
+      <thead>
+        <tr>
+          <th data-field="name">BOOKING CODE</th>
+          <th data-field="name">EMAIL</th>
+          <th data-field="name">CREATED ON</th>
+          <th data-field="name">FLIGHT CODE</th>
+          <th data-field="name">AIRLINE CODE</th>
+          <th data-field="name">DEPARTURE DATE</th>
+          <th data-field="name">ARRIVAL DATE</th>
+          <th data-field="name">PASSENGERS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.booking_code %></td>
+          <td><%= booking.email %></td>
+          <td><%= booking.created_at %></td>
+          <td><%= booking.flight.flight_code %></td>
+          <td>#<%= booking.flight.airline_code %></td>
+          <td><%= booking.flight.departure_date %></td>
+          <td><%= booking.flight.arrival_date %></td>
+          <td>
+            <ul>
+              <% booking.passengers.each do |passenger| %>
+              <li><%= passenger.passenger_name %></li>
+              <li><%= passenger.passport_number %></li>
+              <% end %>
+            </ul>
+          </td>
+          <% if current_user %>
+          <td>
+            <%= link_to @booking, method: :delete, data: { confirm: 'Are you sure you want to cancel this flight?' }, class: "btn-floating btn-large blue" do %>
+              <i class="material-icons">delete</i>
+            <% end %>
+          </td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Booking', new_booking_path %>
+    <%=link_to "BACK", "/", :class=>"btn blue back"%>
+  </div>
+</div>
