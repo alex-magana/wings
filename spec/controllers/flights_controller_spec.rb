@@ -32,7 +32,7 @@ RSpec.describe FlightsController, type: :controller do
     end
 
     it "assigns flight record to flights" do
-      expect(assigns(:flights).first[:id]).to eq flight.id
+      expect(assigns(:flights)).to include flight
     end
 
     it "returns a status code of 200" do

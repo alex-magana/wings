@@ -41,20 +41,20 @@
                 </a>
               </li>
               <li class="top-right">
-                <a href="<%= logout_path %>" class="top-right" data-method="delete" rel="nofollow">
+                <a href="<%= logout_path %>" class="top-right" id="logout-main-nav" data-method="delete" rel="nofollow">
                   <i class="material-icons menu-option top-right">lock_open</i>
                   Log Out
                 </a>
               </li>
             <% else %>
               <li class="top-right">
-                <a href="<%= login_path %>" class="top-right">
+                <a href="<%= login_path %>" class="top-right" id="signin-main-nav">
                   <i class="material-icons menu-option top-right">lock_open</i>
                   Sign In
                 </a>
               </li>
               <li class="top-right">
-                <a href="<%= new_user_path %>" class="top-right">
+                <a href="<%= new_user_path %>" class="top-right" id="signup-main-nav">
                   <i class="material-icons menu-option top-right">input</i>
                   Sign Up
                 </a>

@@ -74,7 +74,7 @@ RSpec.describe BookingsController, type: :controller do
   end
 
   describe "#edit" do
-    before(:each) { get :edit, id: booking.id }
+    before(:each) { get :edit, params: { id: booking.id } }
 
     it "returns a status code of 200" do
       expect(response.status).to eq 200
@@ -89,10 +89,16 @@ RSpec.describe BookingsController, type: :controller do
     let(:flight) { create :flight }
 
     let(:booking_create_request) do
-      post :create, booking: attributes_for(:booking, flight_id: flight.id,
-                                                      user_id: user.id,
-                                                      passengers:
-                                              attributes_for(:passenger))
+      process :create,
+              method: :post,
+              params: {
+                booking: attributes_for(
+                  :booking,
+                  flight_id: flight.id,
+                  user_id: user.id,
+                  passengers: attributes_for(:passenger)
+                )
+              }
     end
 
     it "create new booking" do
@@ -116,7 +122,7 @@ RSpec.describe BookingsController, type: :controller do
     end
 
     before(:each) do
-      put :update, id: booking.id, booking: attr
+      process :update, method: :put, params: { id: booking.id, booking: attr }
       booking.reload
     end
 
@@ -154,7 +160,7 @@ RSpec.describe BookingsController, type: :controller do
 
     it "redirects to bookings index" do
       booking_destroy_request
-      response.should redirect_to bookings_url
+      expect(response).to redirect_to bookings_url
     end
   end
 
@@ -163,12 +169,18 @@ RSpec.describe BookingsController, type: :controller do
 
     before(:each) do
       stub_current_user(user)
-      post :confirm_booking,
-           booking: attributes_for(:booking, user_id: booking.user_id,
-                                             flight_id: booking.flight_id,
-                                             booking_code: booking.booking_code,
-                                             email: booking.email,
-                                             passengers: passenger)
+      process :confirm_booking,
+              method: :post,
+              params: {
+                booking: attributes_for(
+                  :booking,
+                  user_id: booking.user_id,
+                  flight_id: booking.flight_id,
+                  booking_code: booking.booking_code,
+                  email: booking.email,
+                  passengers: passenger
+                )
+              }
     end
 
     it "assigns booking record to booking" do

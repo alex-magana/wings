@@ -38,7 +38,7 @@ RSpec.describe UsersController, type: :controller do
   describe "#create" do
     context "with valid attributes" do
       let(:user_create_request) do
-        post :create, user: attributes_for(:user)
+        process :create, method: :post, params: { user: attributes_for(:user) }
       end
 
       it "creates new user" do
@@ -58,9 +58,16 @@ RSpec.describe UsersController, type: :controller do
 
     context "with invalid attributes" do
       let(:invalid_user_create_request) do
-        post :create, user: attributes_for(:user, first_name: nil,
-                                                  middle_name: nil,
-                                                  last_name: nil)
+        process :create,
+                method: :post,
+                params: {
+                  user: attributes_for(
+                    :user,
+                    first_name: nil,
+                    middle_name: nil,
+                    last_name: nil
+                  )
+                }
       end
 
       it "does not create a new user" do
@@ -84,8 +91,12 @@ RSpec.describe UsersController, type: :controller do
   describe "#user_authenticate" do
     context "with valid attributes" do
       before(:each) do
-        post :user_authenticate, params: { email: user.email,
-                                           password: user.password }
+        process :user_authenticate,
+                method: :post,
+                params: {
+                  email: user.email,
+                  password: user.password
+                }
       end
 
       it "logs in the user" do
@@ -103,8 +114,12 @@ RSpec.describe UsersController, type: :controller do
 
     context "with invalid attributes" do
       before(:each) do
-        post :user_authenticate, params: { email: nil,
-                                           password: user.password }
+        process :user_authenticate,
+                method: :post,
+                params: {
+                  email: nil,
+                  password: user.password
+                }
       end
 
       it "redirects to the log in view" do
@@ -130,7 +145,9 @@ RSpec.describe UsersController, type: :controller do
   describe "#send_reset_email" do
     context "with valid email" do
       before(:each) do
-        post :send_reset_email, params: { email: user.email }
+        process :send_reset_email,
+                method: :post,
+                params: { email: user.email }
       end
 
       it "redirects to log in view" do
@@ -140,7 +157,9 @@ RSpec.describe UsersController, type: :controller do
 
     context "with invalid email" do
       before(:each) do
-        post :send_reset_email, params: { email: nil }
+        process :send_reset_email,
+                method: :post,
+                params: { email: nil }
       end
 
       it "redirects to rest password view" do

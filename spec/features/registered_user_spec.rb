@@ -1,5 +1,7 @@
 require "rails_helper"
 
+Capybara.default_max_wait_time = 30
+
 RSpec.feature "RegisteredUserUsesTheApp", js: true do
   let(:user_valid) { User.find(3) }
 
@@ -14,7 +16,9 @@ RSpec.feature "RegisteredUserUsesTheApp", js: true do
       fill_in "email", with: user_valid.email
       fill_in "password", with: user_valid.password
       find("div.input-field #submit").click
-      expect(page).to have_content("Log Out")
+      sleep(3)
+      expect(page).to have_content("Log Out", count: 1)
+      sleep(3)
     end
 
     scenario "with invalid credentials" do
