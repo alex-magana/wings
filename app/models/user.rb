@@ -8,19 +8,22 @@ class User < ApplicationRecord
             presence: true,
             format: { with: VALID_REGEX_NAME },
             length: { minimum: 3,
-                       message: "Too short. The minimum length is 3 characters." }
+                      message: "Too short. The minimum length"\
+                               " is 3 characters." }
 
   validates :middle_name,
             presence: true,
             format: { with: VALID_REGEX_NAME },
             length: { minimum: 3,
-                      message: "Too short. The minimum length is 3 characters." }
+                      message: "Too short. The minimum length"\
+                               " is 3 characters." }
 
   validates :last_name,
             presence: true,
             format: { with: VALID_REGEX_NAME },
             length: { minimum: 3,
-                      message: "Too short. The minimum length is 3 characters." }
+                      message: "Too short. The minimum length"\
+                               " is 3 characters." }
 
   validates :email,
             presence: true,
@@ -29,13 +32,13 @@ class User < ApplicationRecord
 
   validates :password,
             presence: true,
-            length: { minimum: 6}
+            length: { minimum: 6 }
 
-  scope :user_authenticate, -> (params) do
+  def self.user_authenticate(params)
     where("email = ? and password = ?", params[:email], params[:password])
   end
 
-  scope :check_email, -> (params) do
+  def self.check_email(params)
     where("email = ?", params[:email])
   end
 end
