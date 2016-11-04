@@ -24,7 +24,7 @@
               </li>
               <% if current_user %>
               <li>
-                <a href="<%= past_bookings_path %>">Past bookings</a>
+                <a href="<%= bookings_path %>">Past bookings</a>
               </li>
               <% end %>
               <li class="divider"></li>
@@ -121,7 +121,7 @@
                         </li>
                         <li>
                           <% if current_user %>
-                          <a href="<%= past_bookings_path %>">Past bookings</a>
+                          <a href="<%= bookings_path %>">Past bookings</a>
                           <% end %>
                         </li>
                         <li>
