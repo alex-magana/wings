@@ -1,12 +1,16 @@
 class Flight < ApplicationRecord
   has_many :bookings, inverse_of: :flight
-  accepts_nested_attributes_for :bookings, reject_if: :all_blank, allow_destroy: true
+  belongs_to :airline
 
-  scope :search_flights, -> (params) do
-    joins("INNER JOIN airlines ON airlines.id = flights.airline_id")
-    .where("source_airport_id = ? and destination_airport_id = ? and available_seats >= ?", params[:origin], params[:destination], params[:passenger])
-    .where("departure_date > ?", Date.parse(params[:flight_date_submit]) - 1)
-    .where("departure_date < ? ", Date.parse(params[:flight_date_submit]) + 1)
-    .select("flights.*, airlines.airline_name")
+  accepts_nested_attributes_for :bookings,
+                                reject_if: :all_blank, allow_destroy: true
+
+  def self.search(params)
+    Flight.where("source_airport_id = ? AND destination_airport_id = ? AND "\
+                 "available_seats >= ? AND departure_date > ? AND "\
+                 "departure_date < ?", params[:origin], params[:destination],
+                 params[:passenger],
+                 (Date.parse(params[:flight_date_submit]) - 1),
+                 (Date.parse(params[:flight_date_submit]) + 1))
   end
 end
