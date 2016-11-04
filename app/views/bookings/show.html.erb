@@ -1,6 +1,7 @@
 <div class="row" id="new-reservation">
-  <div class="col s10 offset-s1 card-panel" id="option-fields">
+  <div class="col s10 offset-s1 card-panel">
     <%= render 'form_show', booking: @booking %>
-    <%= link_to 'Back', "/", class: "btn blue back" %>
+    <%= link_to 'Home', "/", class: "btn blue back", data: {turbolinks: false} %>
+    <%= link_to 'Back', "/", class: "btn blue back", data: {turbolinks: false} %>
   </div>
 </div>
