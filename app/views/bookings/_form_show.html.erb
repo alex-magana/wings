@@ -1,0 +1,38 @@
+<%= form_for booking, :url => { :action => "create" } do |f| %>
+<% if booking.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(booking.errors.count, "error") %>
+    prohibited this booking from being saved:</h2>
+
+  <ul>
+    <% booking.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<div class="field">
+  <%= f.hidden_field :user_id %>
+</div>
+<div class="field">
+  <%= f.label :flight_id %>
+  <br/>
+  <%= f.text_field :flight_id, readonly: true %>
+</div>
+<div class="field">
+  <%= f.label :booking_code %>
+  <br/>
+  <%= f.text_field :booking_code, readonly: true %>
+</div>
+<div class="field">
+  <%= f.label :email %>
+  <br/>
+  <%= f.email_field :email, readonly: true %>
+</div>
+<h6 class="align">Passengers</h6>
+<div id='passengers'>
+  <%= f.fields_for :passengers do |passenger| %>
+  <%= render 'confirm_passengers', :f => passenger %>
+  <% end %>
+</div>
+<% end %>
