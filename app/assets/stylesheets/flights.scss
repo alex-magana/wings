@@ -7,22 +7,24 @@
   padding-top: 7%;
 }
 
-#results {
-  height: 80%;
+#preferences-child {
+  text-align: center;
 }
 
-#option-fields {
+#form-preferences {
+  display: inline-block;
   margin-left: auto;
   margin-right: auto;
-  float: none;
+  text-align: center;
+}
+
+#results {
+  height: 80%;
 }
 
 #available-container {
   height: 90%;
   margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
   overflow-y: auto;
 }
 
