@@ -14,30 +14,34 @@
         </tr>
       </thead>
       <tbody>
+        <% @booking.each do |booking| %>
         <div class="row">
-
-
           <tr>
-            <td><%= @booking.booking_code %></td>
-            <td><%= @booking.email %></td>
-            <td><%= @booking.created_at %></td>
-            <td>$<%= @booking.flight_code %></td>
-            <td>$<%= @booking.airline_code %></td>
-            <td>$<%= @booking.departure_date %></td>
-            <td>$<%= @booking.arrival_date %></td>
+            <td><%= booking.booking_code %></td>
+            <td><%= booking.email %></td>
+            <td><%= booking.created_at %></td>
+            <td><%= booking.flight.flight_code %></td>
+            <td><%= booking.flight.airline_code %></td>
+            <td><%= booking.flight.departure_date %></td>
+            <td><%= booking.flight.arrival_date %></td>
             <td>
               <ul>
-                <% @booking.passengers.each do |passenger| %>
+                <% booking.passengers.each do |passenger| %>
                 <li><%= passenger.passenger_name %></li>
                 <li><%= passenger.passport_number %></li>
                 <% end %>
               </ul>
             </td>
+            <% if current_user %>
+            <td>
+              <%= link_to "EDIT", edit_booking_path(booking), class: "btn-floating btn-large blue" %>
+            </td>
+            <% end %>
           </tr>
-
         </div>
+        <% end %>
       </tbody>
     </table>
-    <%=link_to "BACK", "/", :class=>"btn blue back"%>
+    <%= link_to "BACK", "/", :class=>"btn blue back"%>
   </div>
 </div>
