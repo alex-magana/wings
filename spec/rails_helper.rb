@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/rails'
+require "database_cleaner"
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -45,6 +46,17 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  config.before(:suite) { DatabaseCleaner.clean_with :truncation }
+  config.before(:suite) do
+    wings = Seed.new
+    wings.create_all
+  end
+  config.before(:each) { DatabaseCleaner.strategy = :transaction }
+  # config.before(:each, js: true) { DatabaseCleaner.strategy = :truncation }
+  config.before(:each) { DatabaseCleaner.start }
+
+  config.after(:each) { DatabaseCleaner.clean }
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
