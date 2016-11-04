@@ -13,9 +13,7 @@ Rails.application.routes.draw do
   get "reset_password" => "users#reset_password", as: "reset_password"
   post "send_reset_email" => "users#send_reset_email", as: "send_reset_email"
   get "search_flights" => "flights#search_flights", as: "search_flights", defaults: { format: 'js' }
-  get "home" => "flights#home", as: "home"
   post "confirm_booking" => "bookings#confirm_booking", as: "confirm_booking"
-  get "past_bookings" => "bookings#past_bookings", as: "past_bookings"
   get "manage_bookings" => "bookings#manage_bookings", as: "manage_bookings"
   get "search_booking" => "bookings#search_booking", as: "search_booking"
 end
