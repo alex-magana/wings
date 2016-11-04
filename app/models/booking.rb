@@ -19,21 +19,25 @@ class Booking < ApplicationRecord
             presence: true,
             format: { with: VALID_REGEX_EMAIL }
 
-  scope :past_bookings, (lambda do |params|
-    joins("INNER JOIN flights ON flights.id = bookings.flight_id").
-    where("bookings.user_id = ?", params.id).
-    select("bookings.*, flights.flight_code, flights.airline_code,\
-     flights.departure_date, flights.arrival_date")
-  end)
+  validates :cost,
+            presence: true
 
-  scope :search_booking_write, (lambda do |params|
-    where("bookings.booking_code = ?", params[:booking_code])
-  end)
+  before_validation :generate_booking_code, :compute_cost, on: :create
+  before_create :generate_booking_code, :compute_cost
 
-  scope :search_booking_read, (lambda do |params|
-    joins("INNER JOIN flights ON flights.id = bookings.flight_id").
-    where("bookings.booking_code = ?", params[:booking_code]).
-    select("bookings.*, flights.flight_code, flights.airline_code,\
-     flights.departure_date, flights.arrival_date")
-  end)
+  def self.find_by_user(user)
+    Booking.where(user_id: user.id)
+  end
+
+  def self.find_by_booking_code(code)
+    Booking.where(booking_code: code)
+  end
+
+  def generate_booking_code
+    self.booking_code = SecureRandom.hex(4).upcase
+  end
+
+  def compute_cost
+    self.cost = flight.cost * passengers.size
+  end
 end
