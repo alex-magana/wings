@@ -4,28 +4,26 @@ class FlightsController < ApplicationController
   def index
     @airports = Airport.airports_all
   end
+
   def search_flights
     @flights = Flight.search_flights(flight_params)
-    flash[:notice] = nil
-    if @flights.empty?
-      flash[:notice] = "There are no available flights."
-      respond_to do |format|
-        format.js {render layout: false}
-      end
-    else
-      respond_to do |format|
-        format.js {render layout: false}
+    flash[:notice] = "There are no available flights." if @flights.empty?
+    respond_to do |format|
+      format.js do
+        render layout: false, locals: { passengers_qty:
+                                          flight_params[:passenger] }
       end
     end
   end
-  def home
-    redirect_to root_url
-  end
+
   private
-    def flight_params
-      params.permit(:utf8, :button, :format, :origin, :destination, :passenger, :flight_date, :flight_date_submit, :flight_group)
-    end
-    def set_flight
-      @flight = Flight.find(params[:id])
-    end
+
+  def flight_params
+    params.permit(:origin, :destination, :passenger,
+                  :flight_date, :flight_date_submit, :flight_group)
+  end
+
+  def set_flight
+    @flight = Flight.find(params[:id])
+  end
 end
