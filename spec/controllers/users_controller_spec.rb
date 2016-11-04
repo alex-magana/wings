@@ -1,102 +1,151 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
+  subject(:user) { create :user }
+
   describe "#show" do
-    subject(:user) { create :user }
     before(:each) do
       get :show, params: { id: user.id }
     end
-    it 'returns a status code of 200' do
+
+    it "returns a status code of 200" do
       expect(response.status).to eq 200
     end
-    it 'renders the show template' do
-      expect(response).to render_template('show')
+
+    it "renders the show template" do
+      expect(response).to render_template("show")
     end
   end
+
   describe "#new" do
-    subject(:user) { create :user}
     before(:each) do
       get :new
     end
-    it 'assigns user record to user' do
+
+    it "assigns user record to user" do
       expect(assigns(:user)).to be_a_new(User)
     end
-    it 'returns a status code 200' do
+
+    it "returns a status code 200" do
       expect(response.status).to eq 200
     end
-    it 'renders the new template' do
-      expect(response).to render_template('new')
+
+    it "renders the new template" do
+      expect(response).to render_template("new")
     end
   end
-  describe "#edit" do
-    subject(:user) { create :user}
-    before(:each) { get :edit, id: user.id }
-    it 'returns a status code of 200' do
-      expect(response.status).to eq 200
-    end
-    it 'renders the edit template' do
-      expect(response).to render_template('edit')
-    end
-  end
+
   describe "#create" do
-    let(:user_create_request) do
-      post :create, params: { user: attributes_for(:user,
-        first_name: Faker::Name.first_name,
-        middle_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        email: Faker::Internet.email, password: Faker::Internet.password(8)) }
-    end
-    it "creates new user" do
-      expect { user_create_request }.to change(User,:count).by(1)
-    end
-    it 'returns a status code of 302' do
-      user_create_request
-      expect(response.status).to eq 302
-    end
-    it 'redirects to the log in view' do
-      user_create_request
-      expect(response).to redirect_to login_path
-    end
-  end
-  describe "#update" do
+    context "with valid attributes" do
+      let(:user_create_request) do
+        post :create, user: attributes_for(:user)
+      end
 
-  end
-  describe "#destroy" do
+      it "creates new user" do
+        expect { user_create_request }.to change(User, :count).by(1)
+      end
 
+      it "returns a status code of 302" do
+        user_create_request
+        expect(response.status).to eq 302
+      end
+
+      it "redirects to the log in view" do
+        user_create_request
+        expect(response).to redirect_to(flights_path)
+      end
+    end
+
+    context "with invalid attributes" do
+      let(:invalid_user_create_request) do
+        post :create, user: attributes_for(:user, first_name: nil,
+                                                  middle_name: nil,
+                                                  last_name: nil)
+      end
+
+      it "does not create a new user" do
+        expect { invalid_user_create_request }.to_not change(User, :count)
+      end
+
+      it "redirects to the new user view" do
+        invalid_user_create_request
+        expect(response).to redirect_to(new_user_path)
+      end
+    end
   end
+
   describe "#login" do
-    it 'renders the login template' do
+    it "renders the login template" do
       get :login
-      expect(response).to render_template('login')
+      expect(response).to render_template("login")
     end
   end
+
   describe "#user_authenticate" do
-    subject(:user) { create :user }
-    before(:each) do
-      post :user_authenticate, params: { email: user.email,
-        password: user.password }
+    context "with valid attributes" do
+      before(:each) do
+        post :user_authenticate, params: { email: user.email,
+                                           password: user.password }
+      end
+
+      it "logs in the user" do
+        expect(session[:user_id]).to eq user.id
+      end
+
+      it "returns a status code of 302" do
+        expect(response.status).to eq 302
+      end
+
+      it "redirects to the log in view" do
+        expect(response).to redirect_to(flights_path)
+      end
     end
-    it "logs in the user" do
-      expect(session[:user_id]).to eq user.id
-    end
-    it 'returns a status code of 302' do
-      expect(response.status).to eq 302
-    end
-    it 'redirects to the log in view' do
-      expect(response).to redirect_to flights_path
+
+    context "with invalid attributes" do
+      before(:each) do
+        post :user_authenticate, params: { email: nil,
+                                           password: user.password }
+      end
+
+      it "redirects to the log in view" do
+        expect(response).to redirect_to(login_path)
+      end
     end
   end
+
   describe "#logout" do
-    it 'sets the value of session key user_id to nil' do
+    it "sets the value of session key user_id to nil" do
       delete :logout
       expect(session[:user_id]).to eq nil
     end
   end
-  describe "#reset_password" do
 
-  end
-  private
-    def user_params
-      controller.params.permit(:first_name, :middle_name, :last_name, :email, :password, :role_id)
+  describe "#reset_password" do
+    it "renders the passowrd reset view" do
+      get :reset_password
+      expect(response).to render_template("reset_password")
     end
+  end
+
+  describe "#send_reset_email" do
+    context "with valid email" do
+      before(:each) do
+        post :send_reset_email, params: { email: user.email }
+      end
+
+      it "redirects to log in view" do
+        expect(response).to redirect_to(login_path)
+      end
+    end
+
+    context "with invalid email" do
+      before(:each) do
+        post :send_reset_email, params: { email: nil }
+      end
+
+      it "redirects to rest password view" do
+        expect(response).to redirect_to(reset_password_path)
+      end
+    end
+  end
 end
