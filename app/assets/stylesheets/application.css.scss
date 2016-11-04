@@ -20,6 +20,12 @@ html, body {
   width: 100%;
 }
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 nav, footer.page-footer {
   background-color: #F57F17;
 }
@@ -46,7 +52,7 @@ nav, footer.page-footer {
 }
 
 #main {
-  height: 85%;
+  flex: 1 0 auto;
   width: 100%;
   margin-top: -30px;
   margin-bottom: -20px;
