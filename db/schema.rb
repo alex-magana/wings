@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007091246) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20161104075504) do
 
   create_table "airlines", force: :cascade do |t|
     t.string   "airline_name"
@@ -53,7 +50,8 @@ ActiveRecord::Schema.define(version: 20161007091246) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "email"
-    t.index ["flight_id"], name: "index_bookings_on_flight_id", using: :btree
+    t.decimal  "cost"
+    t.index ["flight_id"], name: "index_bookings_on_flight_id"
   end
 
   create_table "flights", force: :cascade do |t|
@@ -84,7 +82,7 @@ ActiveRecord::Schema.define(version: 20161007091246) do
     t.integer  "booking_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["booking_id"], name: "index_passengers_on_booking_id", using: :btree
+    t.index ["booking_id"], name: "index_passengers_on_booking_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -102,7 +100,7 @@ ActiveRecord::Schema.define(version: 20161007091246) do
     t.integer  "role_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["role_id"], name: "index_users_on_role_id", using: :btree
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
 end

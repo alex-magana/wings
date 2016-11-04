@@ -50,6 +50,7 @@ group :development, :test do
   gem 'seed_dump'
   gem "codeclimate-test-reporter", group: :test, require: nil
   gem 'selenium-webdriver', '~> 2.53', '>= 2.53.3'
+  gem "database_cleaner"
 end
 
 group :development do
