@@ -1,6 +1,6 @@
 Flightset
 
-[![CircleCI](https://circleci.com/gh/andela-amagana/wings.svg?style=svg)](https://circleci.com/gh/andela-amagana/wings) [![Coverage Status](https://coveralls.io/repos/github/andela-amagana/wings/badge.svg)](https://coveralls.io/github/andela-amagana/wings) [![Code Climate](https://codeclimate.com/github/andela-amagana/wings/badges/gpa.svg)](https://codeclimate.com/github/andela-amagana/wings) [![Issue Count](https://codeclimate.com/github/andela-amagana/wings/badges/issue_count.svg)](https://codeclimate.com/github/andela-amagana/wings)
+[![CircleCI](https://circleci.com/gh/andela-amagana/wings.svg?&style=shield&circle-token=9051b45b6645f7e23dcccf15809b5c78c183932c)](https://circleci.com/gh/andela-amagana/wings) [![Coverage Status](https://coveralls.io/repos/github/andela-amagana/wings/badge.svg)](https://coveralls.io/github/andela-amagana/wings) [![Code Climate](https://codeclimate.com/github/andela-amagana/wings/badges/gpa.svg)](https://codeclimate.com/github/andela-amagana/wings) [![Issue Count](https://codeclimate.com/github/andela-amagana/wings/badges/issue_count.svg)](https://codeclimate.com/github/andela-amagana/wings)
 
 ##Description
 
