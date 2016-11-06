@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
   def index
     @bookings = Booking.find_by_user(current_user)
     if @bookings.blank? || @bookings.nil?
-      flash[:notice] = "There are no past bookings."
+      flash.now[:notice] = "There are no past bookings."
     end
   end
 
@@ -37,8 +37,7 @@ class BookingsController < ApplicationController
   def update
     if @booking.update(booking_params)
       AppMailer.message_send(@booking).deliver_now
-      redirect_to booking_path(@booking), notice:
-                                          "Booking was successfully updated."
+      redirect_to @booking, notice: "Booking was successfully updated."
     else
       render :edit
     end
@@ -61,7 +60,7 @@ class BookingsController < ApplicationController
   def search_booking
     @booking = Booking.find_by_booking_code(search_params[:booking_code])
     if @booking.blank? == false && @booking.nil? == false
-      render "_search_results"
+      redirect_to edit_booking_path(@booking.first)
     else
       flash[:notice] = "No reservations available."
       redirect_to manage_bookings_path

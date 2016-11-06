@@ -7,7 +7,7 @@ class FlightsController < ApplicationController
 
   def search_flights
     @flights = Flight.search(flight_params)
-    flash[:notice] = "There are no available flights." if @flights.empty?
+    flash.now[:notice] = "There are no available flights." if @flights.empty?
     respond_to do |format|
       format.js do
         render layout: false, locals: { passengers_qty:

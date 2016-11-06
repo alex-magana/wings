@@ -18,9 +18,9 @@ class UsersController < ApplicationController
       @user.role_id = 2
       if @user.save
         set_session_user(@user)
-        redirect_to flights_path, notice: "User was successfully created."
+        redirect_to flights_path
       else
-        redirect_to new_user_path
+        render :new
       end
     end
   end
