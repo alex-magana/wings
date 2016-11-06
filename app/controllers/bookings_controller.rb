@@ -44,6 +44,7 @@ class BookingsController < ApplicationController
   end
 
   def destroy
+    Passenger.destroy_by_booking_id(@booking)
     @booking.destroy
     redirect_to bookings_path, notice:
                                     "Booking was successfully destroyed."

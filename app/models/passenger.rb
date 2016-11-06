@@ -10,4 +10,8 @@ class Passenger < ApplicationRecord
 
   validates :passport_number,
             presence: true
+
+  def self.destroy_by_booking_id(booking)
+    Passenger.where(booking_id: booking.id).destroy_all
+  end
 end
