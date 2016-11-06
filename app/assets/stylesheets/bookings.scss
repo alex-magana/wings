@@ -42,11 +42,7 @@ input:-webkit-autofill {
 }
 
 .create-booking {
-  display: inherit !important;
   margin-top: 10px;
-  margin-bottom: 15px !important;
-  background: none !important;
-  border: none !important;
 }
 
 .back {
@@ -83,4 +79,13 @@ input:-webkit-autofill {
   margin-right: auto;
   float: none;
   padding-top: 20%;
+}
+
+.nested-fields {
+  margin-bottom: 50px;
+}
+
+.add-passenger {
+  width: 55px;
+  margin: auto;
 }
