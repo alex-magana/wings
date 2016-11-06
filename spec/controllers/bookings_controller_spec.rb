@@ -223,7 +223,7 @@ RSpec.describe BookingsController, type: :controller do
       end
 
       it "redirects to the edit template" do
-        expect(response).to redirect_to(edit_booking_path(booking))
+        expect(response).to redirect_to(booking_path(booking))
       end
     end
 

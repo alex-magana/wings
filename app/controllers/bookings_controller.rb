@@ -61,10 +61,18 @@ class BookingsController < ApplicationController
   def search_booking
     @booking = Booking.find_by_booking_code(search_params[:booking_code])
     if @booking.blank? == false && @booking.nil? == false
-      redirect_to edit_booking_path(@booking.first)
+      render_search_booking_result(@booking.first, current_user)
     else
       flash[:notice] = "No reservations available."
       redirect_to manage_bookings_path
+    end
+  end
+
+  def render_search_booking_result(booking, user)
+    if user
+      redirect_to edit_booking_path(booking)
+    else
+      redirect_to booking
     end
   end
 
