@@ -48,7 +48,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'launchy'
   gem 'seed_dump'
-  gem "codeclimate-test-reporter", group: :test, require: nil
+  gem 'codeclimate-test-reporter', '~> 1.0'
   gem 'selenium-webdriver', '~> 2.53', '>= 2.53.3'
   gem "database_cleaner"
 end
