@@ -218,12 +218,12 @@ RSpec.describe BookingsController, type: :controller do
         expect(assigns(:booking).first.user_id).to eq booking.user_id
       end
 
-      it "returns a status code of 200" do
-        expect(response.status).to eq 200
+      it "returns a status code of 302" do
+        expect(response.status).to eq 302
       end
 
-      it "renders the edit template" do
-        expect(response).to render_template("_search_results")
+      it "redirects to the edit template" do
+        expect(response).to redirect_to(edit_booking_path(booking))
       end
     end
 

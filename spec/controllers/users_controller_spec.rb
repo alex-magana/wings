@@ -74,9 +74,9 @@ RSpec.describe UsersController, type: :controller do
         expect { invalid_user_create_request }.to_not change(User, :count)
       end
 
-      it "redirects to the new user view" do
+      it "renders the new user template" do
         invalid_user_create_request
-        expect(response).to redirect_to(new_user_path)
+        expect(response).to render_template("new")
       end
     end
   end

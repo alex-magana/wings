@@ -29,7 +29,7 @@ RSpec.feature "AnonymousUserUsesTheApp", js: true do
     sleep(0.3)
     selected_flight.click
     click_button("submit_option")
-    expect(page).to have_content("ADD PASSENGER")
+    expect(page).to have_content("REMOVE PASSENGER")
   end
 
   scenario "User adds booking details" do
