@@ -1,22 +1,31 @@
 <div class="row current-user">
-  <div class="col s7 z-depth-6 card-panel center" id="user-details">
-    <p id="notice"><%= notice %></p>
-    <p>
-      <strong>First name:</strong>
-      <%= @user.first_name %>
-    </p>
-    <p>
-      <strong>Middle name:</strong>
-      <%= @user.middle_name %>
-    </p>
-    <p>
-      <strong>Last name:</strong>
-      <%= @user.last_name %>
-    </p>
-    <p>
-      <strong>Email:</strong>
-      <%= @user.email %>
-    </p>
-    <%= link_to 'Back', root_path , class: "btn-large blue back"%>
+  <div class="col s7 l7 z-depth-6 card" id="user-details">
+    <%= form_for @user do |f| %>
+    <div class="row">
+      <div class="input-field col s12 l12">
+        <i class="material-icons prefix">assignment_ind</i>
+        <%= f.text_field :first_name, readonly: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l12">
+        <i class="material-icons prefix">assignment_ind</i>
+        <%= f.text_field :middle_name, readonly: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l12">
+        <i class="material-icons prefix">assignment_ind</i>
+        <%= f.text_field :last_name, readonly: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l12">
+        <i class="material-icons prefix">mail</i>
+        <%= f.email_field :email, readonly: true %>
+      </div>
+    </div>
+    <%= link_to 'Back', root_path , class: "btn blue back", data: {turbolinks: false} %>
+    <% end %>
   </div>
 </div>

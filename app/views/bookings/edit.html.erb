@@ -1,6 +1,6 @@
 <div class="row" id="new-reservation">
-  <div class="col s10 offset-s1 card-panel">
-    <%= render 'form_edit', booking: @booking %>
-    <%= link_to 'Back', "/", class: "btn blue back" %>
+  <div class="col s10 offset-s1 l10 offset-l1 card-panel">
+    <%= render 'form_edit', booking: @booking, passenger_count: @booking.passengers.size %>
+    <%= link_to 'Back', "/", class: "btn blue back", data: {turbolinks: false} %>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="row" id="search-booking">
   <div class="col s9" id="search-booking-col">
     <form action="<%= search_booking_path %>" method="get">
-      <input placeholder="Booking code" name="booking_code" id="search" type="text" class="validate">
+      <input placeholder="Booking code" name="booking_code" id="search" type="text" class="validate" required>
       <button class="btn-floating btn-large blue" type="submit" name="action">
         <i class="material-icons">search</i>
       </button>
@@ -9,12 +9,16 @@
   </div>
 </div>
 <div class="row">
-  <% if flash[:notice] == "No reservations available." %>
-  <div class="row margin">
-    <div class="input-field col s12">
-      <p>
-        <%= flash[:notice] %>
-      </p>
+  <% if flash[:notice] %>
+  <div class="row margin flash-message">
+    <div class="col s8 offset-s2 l6 offset-l3">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <ul>
+            <li><%= flash[:notice] %></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
   <% end %>
