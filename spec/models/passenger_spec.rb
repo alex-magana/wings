@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Passenger, type: :model do
-  subject(:passenger) { create :passenger }
-
   describe "associations" do
     it { should belong_to(:booking) }
   end

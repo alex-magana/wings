@@ -3,7 +3,11 @@ require "rails_helper"
 RSpec.describe Booking, type: :model do
   subject(:user) { create :user }
 
-  subject(:booking) { create :booking, user_id: user.id }
+  subject(:booking) do
+    create :booking,
+           user_id: user.id,
+           passengers_attributes: { :"0" => attributes_for(:passenger) }
+  end
 
   describe "associations" do
     it { should belong_to(:flight) }
@@ -37,7 +41,9 @@ RSpec.describe Booking, type: :model do
   describe "finds bookings by user id" do
     it "returns bookings of a registered user" do
       stub_current_user(user)
-      create :booking, user_id: user.id
+      create :booking,
+             user_id: user.id,
+             passengers_attributes: { :"0" => attributes_for(:passenger) }
 
       available_booking = Booking.find_by_user(user)
 

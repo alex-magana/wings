@@ -3,7 +3,11 @@ require "rails_helper"
 RSpec.describe BookingsController, type: :controller do
   let(:user) { create :user }
 
-  subject(:booking) { create :booking, user_id: user.id }
+  subject(:booking) do
+    create :booking,
+           user_id: user.id,
+           passengers_attributes: { :"0" => attributes_for(:passenger) }
+  end
 
   describe "#index" do
     before(:each) do
@@ -96,7 +100,7 @@ RSpec.describe BookingsController, type: :controller do
                   :booking,
                   flight_id: flight.id,
                   user_id: user.id,
-                  passengers: attributes_for(:passenger)
+                  passengers_attributes: { :"0" => attributes_for(:passenger) }
                 )
               }
     end
