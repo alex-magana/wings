@@ -22,6 +22,8 @@ class Booking < ApplicationRecord
   validates :cost,
             presence: true
 
+  validate :must_have_at_least_one_passenger, on: :create
+
   before_validation :generate_booking_code, :compute_cost, on: :create
   before_create :generate_booking_code, :compute_cost
 
@@ -34,6 +36,18 @@ class Booking < ApplicationRecord
   end
 
   private
+
+  def must_have_at_least_one_passenger
+    if passengers_empty?
+      errors.add(:booking, "Must have at least one passenger")
+    end
+  end
+
+  def passengers_empty?
+    passengers.empty? || passengers.all? do |passenger|
+      passenger.marked_for_destruction?
+    end
+  end
 
   def generate_booking_code
     self.booking_code = SecureRandom.hex(4).upcase

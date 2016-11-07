@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Booking, type: :model do
-  user = User.find(2)
+  subject(:user) { create :user }
+
   subject(:booking) { create :booking, user_id: user.id }
 
   describe "associations" do
@@ -35,7 +36,12 @@ RSpec.describe Booking, type: :model do
 
   describe "finds bookings by user id" do
     it "returns bookings of a registered user" do
-      expect(Booking.find_by_user(user).first.user_id).to eq user.id
+      stub_current_user(user)
+      create :booking, user_id: user.id
+
+      available_booking = Booking.find_by_user(user)
+
+      expect(available_booking.first.user_id).to eq user.id
     end
   end
 
