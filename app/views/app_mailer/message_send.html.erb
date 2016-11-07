@@ -11,7 +11,7 @@
       <label>Booking Code:</label>
       <%= @booking.booking_code %><br>
       <ul>
-        <%= @booking.passengers.each do |passenger| %>
+        <% @booking.passengers.each do |passenger| %>
         <li>
           <%= passenger.passenger_name %>
         </li>
