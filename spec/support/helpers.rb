@@ -2,13 +2,10 @@ module Helpers
   def search_flights
     visit root_path
     find_all("div.select-wrapper input").first.click
-    sleep(0.3)
     find("div.select-wrapper li", text: "Goroka").click
     find_all("div.select-wrapper input")[1].click
-    sleep(0.3)
     find("div.select-wrapper li", text: "Madang").click
     find_all("div.select-wrapper input")[2].click
-    sleep(0.3)
     find("div.select-wrapper li", text: "1").click
     page.execute_script("$('.datepicker').pickadate('picker')."\
                         "set('select', '22 October, 2016')")
