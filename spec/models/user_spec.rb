@@ -40,8 +40,24 @@ RSpec.describe User, type: :model do
     it { should_not allow_value("person.ide%ntity[]()@.gmail.com").for(:email) }
   end
 
-  describe "validate password" do
+  describe "validates password" do
     it { should validate_presence_of :password }
     it { should validate_length_of(:password).is_at_least(6) }
+  end
+
+  describe "authenticates user" do
+    it "returns a record of a registered user" do
+      params = { email: user.email, password: user.password }
+
+      expect(User.user_authenticate(params).first.email).to eq params[:email]
+    end
+  end
+
+  describe "checks whether email is in use" do
+    it "returns an existing email" do
+      params = { email: user.email }
+
+      expect(User.check_email(params).first.email).to eq params[:email]
+    end
   end
 end

@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Booking, type: :model do
-  subject(:booking) { create(:booking) }
+  user = User.find(2)
+  subject(:booking) { create :booking, user_id: user.id }
 
   describe "associations" do
     it { should belong_to(:flight) }
@@ -30,5 +31,18 @@ RSpec.describe Booking, type: :model do
 
   describe "validates cost" do
     it { should validate_presence_of :cost }
+  end
+
+  describe "finds bookings by user id" do
+    it "returns bookings of a registered user" do
+      expect(Booking.find_by_user(user).first.user_id).to eq user.id
+    end
+  end
+
+  describe "finds bookings by booking code" do
+    it "returns a booking by booking_code" do
+      available_booking = Booking.find_by_booking_code(booking.booking_code)
+      expect(available_booking.first.booking_code).to eq booking.booking_code
+    end
   end
 end
