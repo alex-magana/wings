@@ -55,6 +55,16 @@ class Seed
     ]
   end
 
+  def passengers_list
+    [
+      {passenger_name: "ALEX MAGANA GATOBU", passport_number: "TY3678UY25", booking_id: 1},
+      {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 1},
+      {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 1},
+      {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 2},
+      {passenger_name: "PASS 2", passport_number: "2DSAFEWE32", booking_id: 2}
+    ]
+  end
+
   def create_all
     roles_list.each { |role| Role.create(role) }
     users_list.each { |user| User.create(user) }
@@ -62,5 +72,6 @@ class Seed
     airports_list.each { |airport| Airport.create(airport) }
     flights_list.each { |flight| Flight.create(flight) }
     bookings_list.each { |booking| Booking.create(booking) }
+    passengers_list.each { |passenger| Passenger.create(passenger) }
   end
 end
