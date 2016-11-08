@@ -93,7 +93,7 @@ class BookingsController < ApplicationController
   end
 
   def set_user
-    params[:booking][:user_id] = current_user_id || 2
+    params[:booking][:user_id] = current_user_id || User.get_walk_in.id
   end
 
   def set_booking

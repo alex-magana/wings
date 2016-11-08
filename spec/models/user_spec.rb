@@ -60,4 +60,10 @@ RSpec.describe User, type: :model do
       expect(User.check_email(params).first.email).to eq params[:email]
     end
   end
+
+  describe "retrieves a user of type walk_in" do
+    it "returns the id of a user belonging to role walk_in" do
+      expect(User.get_walk_in.role_id).to eq 3
+    end
+  end
 end

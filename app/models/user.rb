@@ -4,6 +4,8 @@ class User < ApplicationRecord
   VALID_REGEX_NAME = /[a-zA-Z]+/
   VALID_REGEX_EMAIL = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
+  enum role: { admin: 1, n_user: 2, walk_in: 3 }
+
   validates :first_name,
             presence: true,
             format: { with: VALID_REGEX_NAME },
@@ -40,5 +42,9 @@ class User < ApplicationRecord
 
   def self.check_email(params)
     where("email = ?", params[:email])
+  end
+
+  def self.get_walk_in
+    where(role_id: User.roles[:walk_in]).first
   end
 end
