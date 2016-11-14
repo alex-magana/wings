@@ -22,16 +22,23 @@
         <br/>
         <%= flight.text_field :flight_code, readonly: true %>
       </div>
+
+      <%= fields_for :source_airport, booking.flight.source_airport do |source_airport_fields| %>
       <div class="field">
         <%= flight.label :source_airport %>
         <br/>
-        <%= flight.text_field :source_airport, readonly: true %>
+        <%= source_airport_fields.text_field :airport_name, readonly: true %>
       </div>
+      <% end %>
+
+      <%= fields_for :destination_airport, booking.flight.destination_airport do |destination_airport_fields| %>
       <div class="field">
         <%= flight.label :destination_airport %>
         <br/>
-        <%= flight.text_field :destination_airport, readonly: true %>
+        <%= destination_airport_fields.text_field :airport_name, readonly: true %>
       </div>
+      <% end %>
+
       <div class="field">
         <%= flight.label :departure_date %>
         <br/>

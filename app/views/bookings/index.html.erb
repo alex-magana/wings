@@ -12,7 +12,8 @@
         </div>
       </div>
     </div>
-    <% else %>
+    <% end %>
+    <% if !@bookings.blank? && !@bookings.nil? %>
     <table class="striped responsive-table centered">
       <thead>
         <tr>
@@ -55,7 +56,7 @@
         <% end %>
       </tbody>
     </table>
-    <% end %>
     <%=link_to "BACK", "/", :class=>"btn blue back", data: {turbolinks: false} %>
+    <% end %>
   </div>
 </div>
