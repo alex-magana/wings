@@ -1,0 +1,2 @@
+class DestinationAirport < Airport
+end

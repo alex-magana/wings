@@ -1,5 +1,6 @@
 class Booking < ApplicationRecord
   belongs_to :flight, inverse_of: :bookings
+  belongs_to :user
   has_many :passengers, inverse_of: :booking, dependent: :destroy
   accepts_nested_attributes_for :passengers,
                                 reject_if: :all_blank, allow_destroy: true
@@ -27,12 +28,8 @@ class Booking < ApplicationRecord
   before_validation :generate_booking_code, :compute_cost, on: :create
   before_create :generate_booking_code, :compute_cost
 
-  def self.find_by_user(user)
-    Booking.where(user_id: user.id)
-  end
-
-  def self.find_by_booking_code(code)
-    Booking.where(booking_code: code)
+  def self.search_by_booking_code(code)
+    Booking.find_by(booking_code: code)
   end
 
   private

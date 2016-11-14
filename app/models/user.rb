@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   belongs_to :role
+  has_many :bookings
 
   VALID_REGEX_NAME = /[a-zA-Z]+/
   VALID_REGEX_EMAIL = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
@@ -36,15 +37,24 @@ class User < ApplicationRecord
             presence: true,
             length: { minimum: 6 }
 
-  def self.user_authenticate(params)
-    where("email = ? and password = ?", params[:email], params[:password])
+  before_validation :set_role, on: :create
+  before_create :set_role
+
+  def self.authenticate(params)
+    find_by(email: params[:email], password: params[:password])
   end
 
   def self.check_email(params)
-    where("email = ?", params[:email])
+    find_by(email: params[:email])
   end
 
   def self.get_walk_in
-    where(role_id: User.roles[:walk_in]).first
+    find_by(role_id: User.roles[:walk_in])
+  end
+
+  private
+
+  def set_role
+    self.role_id ||= Role.find_by(role_name: Role.role_names["n_user"]).id
   end
 end
