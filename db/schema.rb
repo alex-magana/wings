@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104075504) do
+ActiveRecord::Schema.define(version: 20161114115405) do
 
   create_table "airlines", force: :cascade do |t|
     t.string   "airline_name"
@@ -59,9 +59,7 @@ ActiveRecord::Schema.define(version: 20161104075504) do
     t.integer  "airline_id"
     t.string   "airline_code"
     t.integer  "source_airport_id"
-    t.string   "source_airport"
     t.integer  "destination_airport_id"
-    t.string   "destination_airport"
     t.string   "gate_id"
     t.datetime "departure_date"
     t.datetime "arrival_date"
