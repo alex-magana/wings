@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :role do
-    role_name Faker::Name.first_name
+    role_name Role.role_names[:n_user]
   end
 end

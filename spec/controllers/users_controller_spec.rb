@@ -38,7 +38,7 @@ RSpec.describe UsersController, type: :controller do
   describe "#create" do
     context "with valid attributes" do
       let(:user_create_request) do
-        process :create, method: :post, params: { user: attributes_for(:user) }
+        post :create, params: { user: attributes_for(:user) }
       end
 
       it "creates new user" do
@@ -58,16 +58,15 @@ RSpec.describe UsersController, type: :controller do
 
     context "with invalid attributes" do
       let(:invalid_user_create_request) do
-        process :create,
-                method: :post,
-                params: {
-                  user: attributes_for(
-                    :user,
-                    first_name: nil,
-                    middle_name: nil,
-                    last_name: nil
-                  )
-                }
+        post :create,
+             params: {
+               user: attributes_for(
+                 :user,
+                 first_name: nil,
+                 middle_name: nil,
+                 last_name: nil
+               )
+             }
       end
 
       it "does not create a new user" do
@@ -81,60 +80,6 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe "#login" do
-    it "renders the login template" do
-      get :login
-      expect(response).to render_template("login")
-    end
-  end
-
-  describe "#user_authenticate" do
-    context "with valid attributes" do
-      before(:each) do
-        process :user_authenticate,
-                method: :post,
-                params: {
-                  email: user.email,
-                  password: user.password
-                }
-      end
-
-      it "logs in the user" do
-        expect(session[:user_id]).to eq user.id
-      end
-
-      it "returns a status code of 302" do
-        expect(response.status).to eq 302
-      end
-
-      it "redirects to the log in view" do
-        expect(response).to redirect_to(flights_path)
-      end
-    end
-
-    context "with invalid attributes" do
-      before(:each) do
-        process :user_authenticate,
-                method: :post,
-                params: {
-                  email: nil,
-                  password: user.password
-                }
-      end
-
-      it "redirects to the log in view" do
-        expect(response).to redirect_to(login_path)
-      end
-    end
-  end
-
-  describe "#logout" do
-    it "sets the value of session key user_id to nil" do
-      delete :logout
-      expect(session[:user_id]).to eq nil
-    end
-  end
-
   describe "#reset_password" do
     it "renders the passowrd reset view" do
       get :reset_password
@@ -145,21 +90,17 @@ RSpec.describe UsersController, type: :controller do
   describe "#send_reset_email" do
     context "with valid email" do
       before(:each) do
-        process :send_reset_email,
-                method: :post,
-                params: { email: user.email }
+        post :send_reset_email, params: { email: user.email }
       end
 
       it "redirects to log in view" do
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_session_path)
       end
     end
 
     context "with invalid email" do
       before(:each) do
-        process :send_reset_email,
-                method: :post,
-                params: { email: nil }
+        post :send_reset_email, params: { email: nil }
       end
 
       it "redirects to rest password view" do

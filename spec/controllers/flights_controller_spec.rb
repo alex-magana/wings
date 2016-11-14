@@ -6,7 +6,7 @@ RSpec.describe FlightsController, type: :controller do
 
     it "assigns airport records to airports" do
       create(:airport)
-      expect(assigns(:airports)).to eq Airport.airports_all
+      expect(assigns(:airports)).to eq Airport.all.order("id ASC")
     end
 
     it "returns a status code of 200" do
@@ -24,11 +24,14 @@ RSpec.describe FlightsController, type: :controller do
     subject(:flight) { create :flight, airline_id: airline.id }
 
     before(:each) do
-      get :search_flights, params: { origin: flight.source_airport_id,
-                                     destination: flight.destination_airport_id,
-                                     passenger: flight.available_seats,
-                                     flight_date_submit:
-                                       flight.departure_date }, format: :js
+      get :search_flights,
+          params: {
+            origin: flight.source_airport_id,
+            destination: flight.destination_airport_id,
+            passenger: flight.available_seats,
+            flight_date_submit: flight.departure_date
+          },
+          format: :js
     end
 
     it "assigns flight record to flights" do

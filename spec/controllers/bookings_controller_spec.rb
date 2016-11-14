@@ -16,7 +16,7 @@ RSpec.describe BookingsController, type: :controller do
     end
 
     it "assigns booking records to bookings" do
-      expect(assigns(:bookings)).to eq Booking.find_by_user(user)
+      expect(assigns(:bookings)).to eq user.bookings
     end
 
     it "returns a status code of 200" do
@@ -46,10 +46,16 @@ RSpec.describe BookingsController, type: :controller do
     let(:flight) { create :flight }
 
     context "when user is not logged in" do
-      before(:each) { get :new, params: { flight_group: flight.id } }
+      before(:each) do
+        get :new, params: { flight_id: flight.id, passengers_qty: 3 }
+      end
 
       it "assigns flight to a booking" do
         expect(assigns(:booking).flight).to eq Flight.find(flight.id)
+      end
+
+      it "associates passenger(s) with a booking" do
+        expect(assigns(:booking).passengers.size).to be >= 1
       end
 
       it "returns a status code of 200" do
@@ -64,7 +70,15 @@ RSpec.describe BookingsController, type: :controller do
     context "when user is logged in" do
       before(:each) do
         stub_current_user(user)
-        get :new, params: { flight_group: flight.id }
+        get :new, params: { flight_id: flight.id, passengers_qty: 3 }
+      end
+
+      it "assigns flight to a booking" do
+        expect(assigns(:booking).flight).to eq Flight.find(flight.id)
+      end
+
+      it "associates passenger(s) with a booking" do
+        expect(assigns(:booking).passengers.size).to be >= 1
       end
 
       it "assigns user email to the booking" do
@@ -93,16 +107,15 @@ RSpec.describe BookingsController, type: :controller do
     let(:flight) { create :flight }
 
     let(:booking_create_request) do
-      process :create,
-              method: :post,
-              params: {
-                booking: attributes_for(
-                  :booking,
-                  flight_id: flight.id,
-                  user_id: user.id,
-                  passengers_attributes: { :"0" => attributes_for(:passenger) }
-                )
-              }
+      post :create,
+           params: {
+             booking: attributes_for(
+               :booking,
+               flight_id: flight.id,
+               user_id: user.id,
+               passengers_attributes: { :"0" => attributes_for(:passenger) }
+             )
+           }
     end
 
     it "create new booking" do
@@ -126,7 +139,7 @@ RSpec.describe BookingsController, type: :controller do
     end
 
     before(:each) do
-      process :update, method: :put, params: { id: booking.id, booking: attr }
+      put :update, params: { id: booking.id, booking: attr }
       booking.reload
     end
 
@@ -173,18 +186,17 @@ RSpec.describe BookingsController, type: :controller do
 
     before(:each) do
       stub_current_user(user)
-      process :confirm_booking,
-              method: :post,
-              params: {
-                booking: attributes_for(
-                  :booking,
-                  user_id: booking.user_id,
-                  flight_id: booking.flight_id,
-                  booking_code: booking.booking_code,
-                  email: booking.email,
-                  passengers: passenger
-                )
-              }
+      post :confirm_booking,
+           params: {
+             booking: attributes_for(
+               :booking,
+               user_id: booking.user_id,
+               flight_id: booking.flight_id,
+               booking_code: booking.booking_code,
+               email: booking.email,
+               passengers: passenger
+             )
+           }
     end
 
     it "assigns booking record to booking" do
@@ -219,7 +231,7 @@ RSpec.describe BookingsController, type: :controller do
       end
 
       it "assigns a booking record to booking" do
-        expect(assigns(:booking).first.user_id).to eq booking.user_id
+        expect(assigns(:booking).user_id).to eq booking.user_id
       end
 
       it "returns a status code of 302" do
