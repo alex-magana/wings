@@ -16,7 +16,7 @@ RSpec.feature "RegisteredUserUsesTheApp", js: true do
 
   context "User logs in" do
     scenario "with valid credentials" do
-      visit new_session_path
+      visit login_path
       fill_in "email", with: user_valid.email
       fill_in "password", with: user_valid.password
       find("div.input-field #submit").click
@@ -26,7 +26,7 @@ RSpec.feature "RegisteredUserUsesTheApp", js: true do
     end
 
     scenario "with invalid credentials" do
-      visit new_session_path
+      visit login_path
       fill_in "email", with: user_invalid.email
       fill_in "password", with: user_invalid.password
       find("div.input-field #submit").click

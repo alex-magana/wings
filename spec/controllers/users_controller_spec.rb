@@ -94,7 +94,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it "redirects to log in view" do
-        expect(response).to redirect_to(new_session_path)
+        expect(response).to redirect_to(login_path)
       end
     end
 

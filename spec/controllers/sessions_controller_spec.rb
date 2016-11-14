@@ -50,7 +50,7 @@ RSpec.describe SessionsController, type: :controller do
 
   describe "#destroy" do
     before(:each) do
-      delete :destroy, params: { id: user.id }
+      delete :destroy
     end
 
     it "destroy the current session" do

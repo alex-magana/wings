@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   def set_send_reset_email_response(status)
     if status
       flash[:notice] = Messages.password_reset_successful
-      redirect_to new_session_path
+      redirect_to login_path
     else
       flash[:notice] = Messages.password_reset_unsuccessful
       redirect_to reset_password_path
