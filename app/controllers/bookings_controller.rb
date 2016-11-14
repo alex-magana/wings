@@ -3,9 +3,9 @@ class BookingsController < ApplicationController
   before_action :set_user, only: [:create]
 
   def index
-    @bookings = Booking.find_by_user(current_user)
+    @bookings = current_user.bookings
     if @bookings.blank? || @bookings.nil?
-      flash.now[:notice] = "There are no past bookings."
+      flash.now[:notice] = Messages.past_bookings_not_available
     end
   end
 
@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
   end
 
   def new
-    flight = Flight.find(new_booking_params[:flight_group].to_i)
+    flight = Flight.find(new_booking_params[:flight_id].to_i)
     @booking = flight.bookings.new
     new_booking_params[:passengers_qty].to_i.times { @booking.passengers.build }
     @booking.email = current_user.email if current_user
@@ -28,7 +28,7 @@ class BookingsController < ApplicationController
     @flight.available_seats = @flight.available_seats - @booking.passengers.size
     if @booking.save && @flight.save
       AppMailer.message_send(@booking).deliver_now
-      redirect_to @booking, notice: "Booking was successfully created."
+      redirect_to @booking, notice: Messages.booking_creation_successful
     else
       render :new
     end
@@ -37,7 +37,7 @@ class BookingsController < ApplicationController
   def update
     if @booking.update(booking_params)
       AppMailer.message_send(@booking).deliver_now
-      redirect_to @booking, notice: "Booking was successfully updated."
+      redirect_to @booking, notice: Messages.booking_update_successful
     else
       render :edit
     end
@@ -45,8 +45,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking.destroy
-    redirect_to bookings_path, notice:
-                                    "Booking was successfully destroyed."
+    redirect_to bookings_path, notice: Messages.booking_destroyed_successful
   end
 
   def confirm_booking
@@ -58,34 +57,28 @@ class BookingsController < ApplicationController
   end
 
   def search_booking
-    @booking = Booking.find_by_booking_code(search_params[:booking_code])
-    if @booking.blank? == false && @booking.nil? == false
-      render_search_booking_result(@booking.first, current_user)
-    else
-      flash[:notice] = "No reservations available."
+    @booking = Booking.search_by_booking_code(search_params[:booking_code])
+    if @booking.blank? && @booking.nil?
+      flash[:notice] = Messages.reservation_not_available
       redirect_to manage_bookings_path
-    end
-  end
-
-  def render_search_booking_result(booking, user)
-    if user
-      redirect_to edit_booking_path(booking)
     else
-      redirect_to booking
+      render_search_booking_result(@booking, current_user)
     end
   end
 
   private
 
   def new_booking_params
-    params.permit(:passengers_qty, :flight_group)
+    params.permit(:passengers_qty, :flight_id)
   end
 
   def booking_params
-    params.require(:booking).permit(:user_id, :flight_id, :email,
-                                    passengers_attributes:
-                                    [:id, :passenger_name,
-                                     :passport_number, :_destroy])
+    params.require(:booking).permit(
+      :user_id,
+      :flight_id,
+      :email,
+      passengers_attributes: [:id, :passenger_name, :passport_number, :_destroy]
+    )
   end
 
   def search_params
@@ -98,5 +91,13 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def render_search_booking_result(booking, user)
+    if user
+      redirect_to edit_booking_path(booking)
+    else
+      redirect_to booking
+    end
   end
 end
