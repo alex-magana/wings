@@ -1,0 +1,31 @@
+<div class="row current-user">
+  <div class="col s7 l7 z-depth-6 card" id="user-details">
+    <%= form_for @user do |f| %>
+    <div class="row">
+      <div class="input-field col s12 l12">
+        <i class="material-icons prefix">assignment_ind</i>
+        <%= f.text_field :first_name, readonly: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l12">
+        <i class="material-icons prefix">assignment_ind</i>
+        <%= f.text_field :middle_name, readonly: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l12">
+        <i class="material-icons prefix">assignment_ind</i>
+        <%= f.text_field :last_name, readonly: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12 l12">
+        <i class="material-icons prefix">mail</i>
+        <%= f.email_field :email, readonly: true %>
+      </div>
+    </div>
+    <%= link_to 'Back', root_path , class: "btn blue back", data: {turbolinks: false} %>
+    <% end %>
+  </div>
+</div>

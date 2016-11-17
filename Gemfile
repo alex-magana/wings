@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -27,13 +25,32 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem "figaro"
+gem 'materialize-sass', '~> 0.96.1'
+gem 'cocoon', '~> 1.2', '>= 1.2.9'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'coveralls', require: false
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
   gem 'byebug', platform: :mri
   gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
+  gem 'faker', '~> 1.6', '>= 1.6.6'
+  gem 'capybara', '~> 2.10', '>= 2.10.1'
+  gem 'factory_girl_rails', '~> 4.7'
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.1'
+  gem 'rails-controller-testing'
+  gem 'launchy'
+  gem 'seed_dump'
+  gem 'codeclimate-test-reporter', '~> 1.0'
+  gem 'selenium-webdriver', '~> 2.53', '>= 2.53.3'
+  gem "database_cleaner"
 end
 
 group :development do
@@ -43,11 +60,14 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem "letter_opener"
+end
+
+group :production do
+  #Use Postgres for production
+  gem 'pg'
+  gem 'rails_12factor'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'materialize-sass', '~> 0.96.1'
-
-gem 'cocoon', '~> 1.2', '>= 1.2.9'

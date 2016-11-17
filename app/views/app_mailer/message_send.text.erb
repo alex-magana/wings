@@ -1,0 +1,15 @@
+Welcome to flightset.com <%= @booking.email %>
+===============================================
+
+You have successfully booked a flight on flightset.com,
+your booking details are as follows:
+<%= @booking.booking_code %>.<br>
+
+<% @booking.passengers.each do |passenger| %>
+  <%= passenger.passenger_name %>
+  <%= passenger.passport_number %>
+<% end %>
+
+To visit the site, just follow this link: <%= @url %>.
+
+Thanks for making reservations with flightset and have a great day!

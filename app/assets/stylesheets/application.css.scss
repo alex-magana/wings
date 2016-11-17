@@ -19,17 +19,40 @@ html, body {
   height: 100%;
   width: 100%;
 }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 nav, footer.page-footer {
   background-color: #F57F17;
 }
 
+.top-right {
+  display: inline-flex !important;
+}
+
+.side-nav a {
+  display: inline-flex;
+}
+
+.menu-option {
+  margin-right: 3px;
+}
+
+.dropdown-parent {
+  margin-left: -11px;
+}
+
 #header {
-  height: 10%;
+  height: 8%;
   width: 100%;
 }
 
 #main {
-  height: 80%;
+  flex: 1 0 auto;
   width: 100%;
   margin-top: -30px;
   margin-bottom: -20px;
@@ -40,11 +63,31 @@ nav, footer.page-footer {
 }
 
 #footer {
-  height: 10%;
   width: 100%;
 }
 
 .footer-link {
   display:inline;
   margin: 3px;
+}
+
+#social {
+  float: left;
+}
+
+#more-information {
+  float: right;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #000;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #000;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #000;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #000;
 }

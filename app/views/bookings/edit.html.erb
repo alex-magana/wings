@@ -1,6 +1,6 @@
-<h1>Editing Project</h1>
-
-<%= render 'form', project: @project %>
-
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>
+<div class="row" id="new-reservation">
+  <div class="col s10 offset-s1 l10 offset-l1 card-panel">
+    <%= render 'form_edit', booking: @booking, passenger_count: @booking.passengers.size %>
+    <%= link_to 'Back', "/", class: "btn blue back", data: {turbolinks: false} %>
+  </div>
+</div>

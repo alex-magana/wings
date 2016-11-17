@@ -1,7 +1,21 @@
-<div class="row" id="available-parent">
-  <div class="col s10 offset-s2" id="available">
-    <form class="" action="<%= book_flight_path %>" method="get">
+<% if flash[:notice] %>
+<div class="row margin flash-message">
+  <div class="col s8 offset-s2 l6 offset-l3">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <ul>
+          <li><%= flash[:notice] %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<% else %>
+<form action="<%= new_booking_path %>" method="get">
+  <div class="row">
+    <div class="col s12 l12" id="available-content">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="passengers_qty" value="<%= passengers_qty %>">
       <table class="striped responsive-table centered">
         <thead>
           <tr>
@@ -14,28 +28,28 @@
         </thead>
         <tbody>
           <div class="row">
-
             <% @flights.each do |flight| %>
             <tr>
-              <td><%= flight.airline_name %></td>
+              <td><%= flight.airline.airline_name %></td>
               <td><%= flight.departure_date %></td>
               <td><%= flight.arrival_date %></td>
               <td>$<%= flight.cost %></td>
               <td>
-                <input name="flight_group" type="radio" value="<%= flight.id %>"/>
+                <input name="flight_id" type="radio" value="<%= flight.id %>" class="validate flight_option" required/>
               </td>
             </tr>
             <% end %>
           </div>
         </tbody>
       </table>
-      <div class="container row">
-        <div class="col s10 offset-s4">
-          <button class="btn waves-effect waves-light blue" type="submit" name="action">Select flight
-            <i class="material-icons right">send</i>
-          </button>
-        </div>
-      </div>
-    </form>
+    </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col s8 offset-s4">
+      <button class="btn blue" type="submit" name="action" id="submit_option">Select flight
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </div>
+</form>
+<% end %>

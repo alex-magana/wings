@@ -1,11 +1,11 @@
 <div class='nested-fields'>
   <div class="field">
     <%= f.label :passenger_name %>
-    <%= f.text_field :passenger_name %>
+    <%= f.text_field :passenger_name, class: "validate", required: true %>
   </div>
   <div class="field">
     <%= f.label :passport_number %>
-    <%= f.text_field :passport_number %>
+    <%= f.text_field :passport_number, class: "validate", required: true %>
   </div>
-  <%= link_to_remove_association "remove passenger", f %>
+  <%= link_to_remove_association "remove passenger", f, class: "col s12 l6 offset-l3 btn blue remove" %>
 </div>

@@ -1,0 +1,75 @@
+<%= form_for user, :url => { :action => "create" }, method: "post", :html => { class: "col s12 z-depth-6 card-panel new-user" } do |f| %>
+<% if user.errors.any? %>
+<div class="row margin flash-message">
+  <div class="col s8 offset-s2 l6 offset-l3">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <div id="error_explanation">
+          <h5><%= pluralize(user.errors.count, "error") %>
+            prohibited this user from being saved:</h5>
+          <ul>
+            <% user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<% if flash[:notice] %>
+<div class="row margin flash-message">
+  <div class="col s8 offset-s2 l6 offset-l3">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <ul>
+          <li><%= flash[:notice] %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<%= f.hidden_field :role_id %>
+<div class="row">
+  <div class="input-field col s12 l4">
+    <i class="material-icons prefix">assignment_ind</i>
+    <%= f.text_field :first_name, class: "validate", placeholder:"First Name", required: true  %>
+  </div>
+  <div class="input-field col s12 l4">
+    <i class="material-icons prefix">assignment_ind</i>
+    <%= f.text_field :middle_name, class: "validate", placeholder:"Middle Name", required: true  %>
+  </div>
+  <div class="input-field col s12 l4">
+    <i class="material-icons prefix">assignment_ind</i>
+    <%= f.text_field :last_name, class: "validate", placeholder:"Last Name", required: true  %>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s12 l12">
+    <i class="material-icons prefix">mail</i>
+    <%= f.email_field :email, class: "validate", placeholder:"Email Address", required: true  %>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s12 l12">
+    <i class="material-icons prefix">lock</i>
+    <%= f.password_field :password, class: "validate", placeholder:"Password", required: true  %>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <%= f.submit 'Create account', class: 'submit btn blue' do %>
+      <i class="material-icons right">send</i>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12 login-path">
+    <p>Already have an account?
+      <%= link_to 'Log in', login_path %>
+    </p>
+  </div>
+</div>
+<% end %>

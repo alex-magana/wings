@@ -1,36 +1,105 @@
-<%= form_for booking do |f| %>
+<%= form_for booking, :url => { :action => "confirm_booking" } do |f| %>
 <% if booking.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(booking.errors.count, "error") %>
-    prohibited this project from being saved:</h2>
+<div class="row margin flash-message">
+  <div class="col s8 offset-s2 l6 offset-l3">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <div id="error_explanation">
+          <h5><%= pluralize(booking.errors.count, "error") %>
+            prohibited this booking from being saved:</h5>
 
-  <ul>
-    <% booking.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-<div class="field">
-  <%= f.label :flight_id %>
-  <br/>
-  <%= f.text_field :flight_id %>
-</div>
-<div class="field">
-  <%= f.label :booking_code %>
-  <br/>
-  <%= f.text_field :booking_code %>
-</div>
-<h3>Passengers</h3>
-<div id='passengers'>
-  <%= f.fields_for :passengers do |passenger| %>
-  <%= render 'passenger_fields', :f => passenger %>
-  <% end %>
-  <div class='links'>
-    <%= link_to_add_association 'add passenger', f, :passengers %>
+          <ul>
+            <% booking.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<div class="actions">
-  <%= f.submit %>
+<% end %>
+<div class="row">
+  <div class="col s12 l5">
+    <div class="field">
+      <%= f.hidden_field :flight_id %>
+    </div>
+    <%= fields_for :flight, booking.flight do |flight| %>
+      <div class="field">
+        <%= flight.label :flight_code %>
+        <br/>
+        <%= flight.text_field :flight_code, readonly: true %>
+      </div>
+
+      <%= fields_for :source_airport, booking.flight.source_airport do |source_airport_fields| %>
+      <div class="field">
+        <%= flight.label :source_airport %>
+        <br/>
+        <%= source_airport_fields.text_field :airport_name, readonly: true %>
+      </div>
+      <% end %>
+
+      <%= fields_for :destination_airport, booking.flight.destination_airport do |destination_airport_fields| %>
+      <div class="field">
+        <%= flight.label :destination_airport %>
+        <br/>
+        <%= destination_airport_fields.text_field :airport_name, readonly: true %>
+      </div>
+      <% end %>
+      
+      <div class="field">
+        <%= flight.label :departure_date %>
+        <br/>
+        <%= flight.text_field :departure_date, readonly: true %>
+      </div>
+      <div class="field">
+        <%= flight.label :arrival_date %>
+        <br/>
+        <%= flight.text_field :arrival_date, readonly: true %>
+      </div>
+      <div class="field">
+        <%= flight.hidden_field :cost %>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :cost %>
+      <br/>
+      <%= f.text_field :cost, readonly: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %>
+      <br/>
+      <% if current_user %>
+      <%= f.email_field :email, readonly: true %>
+      <% else %>
+      <%= f.email_field :email, class: "validate", required: true %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col s12 l7">
+    <h6 class="align">Passengers</h6>
+    <div class="field">
+      <%= hidden_field_tag "passenger_count", passenger_count %>
+    </div>
+    <div id='passengers'>
+      <%= f.fields_for :passengers do |passenger| %>
+      <%= render 'passenger_fields', :f => passenger %>
+      <% end %>
+      <div class='links add-passenger'>
+        <%= link_to_add_association f, :passengers, class: "btn-floating btn-large btn blue", id: "add-passenger" do %>
+          <i class="material-icons">add</i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12 l12">
+    <div class="actions">
+      <%= f.submit "CREATE BOOKING", class: "col s12 l12 btn blue create-booking" %>
+    </div>
+  </div>
 </div>
 <% end %>

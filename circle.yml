@@ -1,0 +1,3 @@
+test:
+  post:
+    - CODECLIMATE_REPO_TOKEN=$CODE_CLIMATE_TOKEN bundle exec codeclimate-test-reporter

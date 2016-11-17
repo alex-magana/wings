@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  </head>
+  <body>
+    <h1>Welcome to flightset.com,
+      <%= @booking.email %></h1>
+    <p>
+      You have successfully booked a flight on flightset.com, your booking details are as follows:<br>
+      <label>Booking Code:</label>
+      <%= @booking.booking_code %><br>
+      <ul>
+        <% @booking.passengers.each do |passenger| %>
+        <li>
+          <%= passenger.passenger_name %>
+        </li>
+        <li>
+          <%= passenger.passport_number %>
+        </li>
+        <% end %>
+      </ul>
+    </p>
+    <p>
+      To visit the site, just follow this link:
+      <%= @url %>.
+    </p>
+    <p>Thanks for making reservations with flightset and have a great day!</p>
+  </body>
+</html>

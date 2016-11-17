@@ -1,0 +1,52 @@
+<div class="row" id="login-page">
+  <div class="col s12 z-depth-6 card-panel" id="login-details">
+    <% if flash[:notice] %>
+    <div class="row margin flash-message">
+      <div class="col s8 offset-s2 l6 offset-l3">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <ul>
+              <li><%= flash[:notice] %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <%= form_tag("login", method: "post", class:"login-form") do %>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-social-person-outline prefix"></i>
+          <%= email_field_tag "email", nil, class: "validate", required: true %>
+          <%= label_tag "email", "Email", class: "center-align", :data => { :error => 'Wrong' } %>
+        </div>
+      </div>
+      <div class="row margin">
+        <div class="input-field col s12">
+          <i class="mdi-action-lock-outline prefix"></i>
+          <%= password_field_tag :password, nil, required: true %>
+          <%= label_tag(:password, "Password") %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= button_tag(type: "submit", class: "submit btn blue col s12", disable_with: "Authenticating...", id: "submit") do %>
+           Login
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6 m6 l6">
+          <p class="margin medium-small">
+            <%= link_to "Register Now!", new_user_path %>
+          </p>
+        </div>
+        <div class="input-field col s6 m6 l6">
+          <p class="margin right-align medium-small">
+            <%= link_to "Forgot password?", reset_password_path %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
